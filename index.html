@@ -795,19 +795,18 @@
     <script src="js/tmdb-cache.js" data-allowed></script>
 
     <!-- ============================================ -->
-    <!-- TMDB Auto-Loader - ACTIVADO ✅ -->
+    <!-- TMDB Auto-Loader (DESACTIVADO - usando archivos estáticos) -->
     <!-- ============================================ -->
-    <!-- El contenido se actualiza automáticamente desde TMDB API -->
-    <!-- Cache de 24 horas en el navegador para carga rápida -->
+    <!-- Para activar actualización automática, descomenta las 3 líneas siguientes -->
+    <!-- y comenta los archivos de base de datos estáticos -->
 
-    <script>window.USE_TMDB_AUTO_LOADER = true;</script>
-    <script src="js/databases/tmdb-auto-loader.js" data-allowed></script>
-    <script>initAutoLoader();</script>
+    <!-- <script>window.USE_TMDB_AUTO_LOADER = true;</script> -->
+    <!-- <script src="js/databases/tmdb-auto-loader.js" data-allowed></script> -->
+    <!-- <script>initAutoLoader();</script> -->
 
     <!-- ============================================ -->
-    <!-- Load database sources (COMENTADOS - usando Auto-Loader) -->
-    <!-- Si el Auto-Loader falla, descomenta estos archivos como fallback -->
-    <!--
+    <!-- Load database sources (ACTIVADO - archivos estáticos) -->
+    <!-- ============================================ -->
     <script src="js/databases/hdtoday.js" data-allowed></script>
     <script src="js/databases/lodynet.js" data-allowed></script>
     <script src="js/databases/aradramatv.js" data-allowed></script>
@@ -818,7 +817,6 @@
     <script src="js/databases/asiancrush.js" data-allowed></script>
     <script src="js/databases/cinecalidad.js" data-allowed></script>
     <script src="js/databases/cuevana.js" data-allowed></script>
-    -->
 
     <!-- Combine databases -->
     <script src="js/databases/index.js" data-allowed></script>
