@@ -1,0 +1,27 @@
+// AsianCrush Database - Asian Independent and Arthouse Cinema
+// Source: asiancrush.com / Asian Films and Indie content
+
+const asiancrushContent = [
+    // BOLLYWOOD HITS
+    {id: 700, tmdbId: "19995", title: "3 Idiots", thumbnail: "https://image.tmdb.org/t/p/original/66A9MqXOyVFCssoloscw wives.jpg", year: 2009, genre: ["Comedy", "Drama"], rating: 94, description: "Tres amigos cuestionan el sistema educativo en India.", region: "Asia", country: "India", type: "movie", language: "Hindi", source: "asiancrush"},
+    {id: 701, tmdbId: "419704", title: "Dangal", thumbnail: "https://image.tmdb.org/t/p/original/6JFFyvgvqg3YZxrmgvgz8UMaMB7.jpg", year: 2016, genre: ["Drama", "Sports"], rating: 93, description: "Un luchador entrena a sus hijas para competir en lucha libre.", region: "Asia", country: "India", type: "movie", language: "Hindi", source: "asiancrush"},
+    {id: 702, tmdbId: "644479", title: "Honest Thief", thumbnail: "https://image.tmdb.org/t/p/original/zeD4PabP6099gpE0STWJrJrCBCs.jpg", year: 2020, genre: ["Action", "Thriller"], rating: 82, description: "Un ladrón de bancos quiere entregarse para estar con su novia.", region: "Asia", country: "Estados Unidos", type: "movie", language: "Inglés", source: "asiancrush"},
+    {id: 703, tmdbId: "385103", title: "Sisu", thumbnail: "https://image.tmdb.org/t/p/original/ygO9ca8rxWaP0mOrQC6VYyKZPKs.jpg", year: 2022, genre: ["Action", "War"], rating: 88, description: "Un soldado finlandés lucha contra nazis en Laponia.", region: "Asia", country: "Finlandia", type: "movie", language: "Finlandés", source: "asiancrush"},
+    {id: 704, tmdbId: "527774", title: "Baahubali 2", thumbnail: "https://image.tmdb.org/t/p/original/hgkfY0QiTaVelsXUl3VbyhY3Lfc.jpg", year: 2017, genre: ["Action", "Adventure"], rating: 91, description: "Shiva descubre su legado y busca justicia para su reino.", region: "Asia", country: "India", type: "movie", language: "Telugu", source: "asiancrush"},
+    {id: 705, tmdbId: "453405", title: "Gemini Man", thumbnail: "https://image.tmdb.org/t/p/original/uTALxYJPiQK5sD4lmth8JdMq0My.jpg", year: 2019, genre: ["Action", "Sci-Fi"], rating: 79, description: "Un asesino es perseguido por una versión más joven de sí mismo.", region: "Asia", country: "Estados Unidos", type: "movie", language: "Inglés", source: "asiancrush"},
+    {id: 706, tmdbId: "512196", title: "Happy Death Day 2U", thumbnail: "https://image.tmdb.org/t/p/original/qWqTpXAW2heUfpg6fYuLE6JsrNW.jpg", year: 2019, genre: ["Horror", "Comedy"], rating: 80, description: "Tree debe morir repetidamente en una dimensión paralela.", region: "Asia", country: "Estados Unidos", type: "movie", language: "Inglés", source: "asiancrush"},
+    {id: 707, tmdbId: "438650", title: "Cold Pursuit", thumbnail: "https://image.tmdb.org/t/p/original/hXgmWPd1SuujRZ4QnKLzrj79PAw.jpg", year: 2019, genre: ["Action", "Thriller"], rating: 81, description: "Un quitanieves busca venganza por la muerte de su hijo.", region: "Asia", country: "Estados Unidos", type: "movie", language: "Inglés", source: "asiancrush"},
+
+    // ASIAN ACTION MOVIES
+    {id: 720, tmdbId: "399566", title: "Godzilla vs. Kong", thumbnail: "https://image.tmdb.org/t/p/original/pgqgaUx1cJb5oZQQ5v0tNARCeBp.jpg", year: 2021, genre: ["Action", "Sci-Fi"], rating: 86, description: "Dos titanes legendarios chocan en una batalla épica.", region: "Asia", country: "Estados Unidos", type: "movie", language: "Inglés", source: "asiancrush"},
+    {id: 721, tmdbId: "412656", title: "Chaos Walking", thumbnail: "https://image.tmdb.org/t/p/original/9kg73Mg8WJKlB9Y2SAJzeDKAnuB.jpg", year: 2021, genre: ["Sci-Fi", "Adventure"], rating: 78, description: "En un mundo donde todos pueden escuchar pensamientos, un joven ayuda a una misteriosa chica.", region: "Asia", country: "Estados Unidos", type: "movie", language: "Inglés", source: "asiancrush"},
+    {id: 722, tmdbId: "520763", title: "A Quiet Place Part II", thumbnail: "https://image.tmdb.org/t/p/original/4q2hz2m8hubgvijz8Ez0T2Os2Yv.jpg", year: 2021, genre: ["Horror", "Thriller"], rating: 87, description: "La familia Abbott enfrenta los terrores del mundo exterior.", region: "Asia", country: "Estados Unidos", type: "movie", language: "Inglés", source: "asiancrush"},
+    {id: 723, tmdbId: "522402", title: "Finch", thumbnail: "https://image.tmdb.org/t/p/original/jKuDyqx7jrjiR9cDzB5pxzhJAdv.jpg", year: 2021, genre: ["Sci-Fi", "Drama"], rating: 84, description: "Un inventor crea un robot para cuidar a su perro después del apocalipsis.", region: "Asia", country: "Estados Unidos", type: "movie", language: "Inglés", source: "asiancrush"},
+    {id: 724, tmdbId: "585083", title: "Hotel Transylvania: Transformania", thumbnail: "https://image.tmdb.org/t/p/original/teCy1egGQa0y8ULJvlrDHQKnxBL.jpg", year: 2022, genre: ["Animation", "Comedy"], rating: 82, description: "Drácula y sus amigos son transformados en humanos.", region: "Asia", country: "Estados Unidos", type: "movie", language: "Inglés", source: "asiancrush"},
+    {id: 725, tmdbId: "568620", title: "Snake Eyes", thumbnail: "https://image.tmdb.org/t/p/original/uIXF0sQGXOxQhbaEaKOi2VYlIL0.jpg", year: 2021, genre: ["Action", "Adventure"], rating: 79, description: "El origen de Snake Eyes, un solitario luchador de G.I. Joe.", region: "Asia", country: "Estados Unidos", type: "movie", language: "Inglés", source: "asiancrush"}
+];
+
+// Export
+if (typeof module !== 'undefined' && module.exports) {
+    module.exports = asiancrushContent;
+}

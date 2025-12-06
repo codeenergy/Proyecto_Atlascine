@@ -1,0 +1,27 @@
+// DramaCool Database - Asian Dramas and Cinema
+// Source: dramacool.com / Korean, Japanese, Chinese dramas
+
+const dramacoolContent = [
+    // POPULAR K-DRAMAS
+    {id: 600, tmdbId: "100088", title: "Squid Game", thumbnail: "https://image.tmdb.org/t/p/original/dDlEmu3EZ0Pgg93K2SVNLCjCSvE.jpg", year: 2021, genre: ["Thriller", "Drama"], rating: 95, description: "Personas desesperadas compiten en juegos infantiles por un premio mortal.", region: "Asia", country: "Corea del Sur", type: "series", language: "Coreano", source: "dramacool"},
+    {id: 601, tmdbId: "111453", title: "All of Us Are Dead", thumbnail: "https://image.tmdb.org/t/p/original/ze4lhw0oLCr6q91RQgcAibyaaLW.jpg", year: 2022, genre: ["Horror", "Drama"], rating: 88, description: "Estudiantes atrapados luchan por sobrevivir un brote zombie.", region: "Asia", country: "Corea del Sur", type: "series", language: "Coreano", source: "dramacool"},
+    {id: 602, tmdbId: "131977", title: "The Glory", thumbnail: "https://image.tmdb.org/t/p/original/r0s4BpsGcEknRW629LAAs8fGqwO.jpg", year: 2022, genre: ["Drama", "Thriller"], rating: 92, description: "Una mujer busca venganza contra sus abusadores de la escuela.", region: "Asia", country: "Corea del Sur", type: "series", language: "Coreano", source: "dramacool"},
+    {id: 603, tmdbId: "208448", title: "Sweet Home", thumbnail: "https://image.tmdb.org/t/p/original/m7e7rMgzyUtEi5xmcdytPvFq9UR.jpg", year: 2020, genre: ["Horror", "Fantasy"], rating: 87, description: "Residentes de un apartamento luchan contra monstruos.", region: "Asia", country: "Corea del Sur", type: "series", language: "Coreano", source: "dramacool"},
+    {id: 604, tmdbId: "209867", title: "Hometown Cha-Cha-Cha", thumbnail: "https://image.tmdb.org/t/p/original/7VPlK4DYmxT3PumVS4BNNe0tdsU.jpg", year: 2021, genre: ["Romance", "Comedy"], rating: 90, description: "Una dentista de Seúl se muda a un pueblo costero.", region: "Asia", country: "Corea del Sur", type: "series", language: "Coreano", source: "dramacool"},
+    {id: 605, tmdbId: "136315", title: "Physical: 100", thumbnail: "https://image.tmdb.org/t/p/original/c2iUE5aEu8bWJ9JkZlLG0QHGLPn.jpg", year: 2023, genre: ["Reality", "Competition"], rating: 89, description: "100 atletas compiten para encontrar el cuerpo perfecto.", region: "Asia", country: "Corea del Sur", type: "series", language: "Coreano", source: "dramacool"},
+    {id: 606, tmdbId: "95557", title: "Inventing Anna", thumbnail: "https://image.tmdb.org/t/p/original/6Jz0ca8SXQHMoEYfz9CxdRDLwze.jpg", year: 2022, genre: ["Drama", "Crime"], rating: 85, description: "La historia de Anna Delvey, una estafadora de Nueva York.", region: "Asia", country: "Estados Unidos", type: "series", language: "Inglés", source: "dramacool"},
+    {id: 607, tmdbId: "119051", title: "Wednesday", thumbnail: "https://image.tmdb.org/t/p/original/9PFonBhy4cQy7Jz20NpMygczOkv.jpg", year: 2022, genre: ["Comedy", "Mystery"], rating: 91, description: "Wednesday Addams investiga una serie de asesinatos.", region: "Asia", country: "Estados Unidos", type: "series", language: "Inglés", source: "dramacool"},
+
+    // ANIME SERIES
+    {id: 620, tmdbId: "37854", title: "One Piece", thumbnail: "https://image.tmdb.org/t/p/original/cMD9Ygz11zjJzAovURpO75Qg7rT.jpg", year: 1999, genre: ["Animation", "Adventure"], rating: 94, description: "Un pirata busca el tesoro One Piece para ser el Rey de los Piratas.", region: "Asia", country: "Japón", type: "series", language: "Japonés", source: "dramacool"},
+    {id: 621, tmdbId: "1429", title: "Attack on Titan", thumbnail: "https://image.tmdb.org/t/p/original/hTP1DtLGFamjfu8WqjnuQdP1n4i.jpg", year: 2013, genre: ["Animation", "Action"], rating: 96, description: "La humanidad lucha contra gigantes comedores de humanos.", region: "Asia", country: "Japón", type: "series", language: "Japonés", source: "dramacool"},
+    {id: 622, tmdbId: "46260", title: "Naruto Shippuden", thumbnail: "https://image.tmdb.org/t/p/original/zAYRe2bJxpWTVrwwmBc00VFkAf4.jpg", year: 2007, genre: ["Animation", "Action"], rating: 93, description: "Naruto regresa después de años de entrenamiento.", region: "Asia", country: "Japón", type: "series", language: "Japonés", source: "dramacool"},
+    {id: 623, tmdbId: "85937", title: "Demon Slayer", thumbnail: "https://image.tmdb.org/t/p/original/xUfRZu2mi8jH6SzQEJGP6tjBuYj.jpg", year: 2019, genre: ["Animation", "Action"], rating: 95, description: "Un joven busca venganza contra los demonios que mataron a su familia.", region: "Asia", country: "Japón", type: "series", language: "Japonés", source: "dramacool"},
+    {id: 624, tmdbId: "60625", title: "My Hero Academia", thumbnail: "https://image.tmdb.org/t/p/original/w8A6PNcKYfv9sDxTi4wqB8gkVlc.jpg", year: 2016, genre: ["Animation", "Action"], rating: 92, description: "Un joven sin poderes sueña con ser un héroe.", region: "Asia", country: "Japón", type: "series", language: "Japonés", source: "dramacool"},
+    {id: 625, tmdbId: "95479", title: "Jujutsu Kaisen", thumbnail: "https://image.tmdb.org/t/p/original/4q4Vpohq6easr6FRN17k0hze0cA.jpg", year: 2020, genre: ["Animation", "Action"], rating: 94, description: "Un estudiante se une a una organización para combatir maldiciones.", region: "Asia", country: "Japón", type: "series", language: "Japonés", source: "dramacool"}
+];
+
+// Export
+if (typeof module !== 'undefined' && module.exports) {
+    module.exports = dramacoolContent;
+}

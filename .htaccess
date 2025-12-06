@@ -1,0 +1,120 @@
+# ============================================
+# ATLASCINE - CONFIGURACIÓN COMPATIBLE HOSTALIA
+# Versión optimizada para hosting compartido
+# ============================================
+
+# ============================================
+# 1. REWRITE RULES BÁSICAS
+# ============================================
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /
+
+    # Forzar HTTPS (DESACTIVADO inicialmente - activar cuando SSL esté configurado)
+    # RewriteCond %{HTTPS} off
+    # RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+    # No reescribir archivos existentes
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_FILENAME} !-l
+
+    # Routing para SPA
+    RewriteRule . /index.html [L]
+</IfModule>
+
+# ============================================
+# 2. SECURITY HEADERS BÁSICOS
+# ============================================
+
+<IfModule mod_headers.c>
+    # X-Frame-Options - Protección contra clickjacking
+    Header set X-Frame-Options "SAMEORIGIN"
+
+    # X-Content-Type-Options - Prevenir MIME sniffing
+    Header set X-Content-Type-Options "nosniff"
+
+    # X-XSS-Protection - Protección XSS
+    Header set X-XSS-Protection "1; mode=block"
+
+    # Referrer Policy
+    Header set Referrer-Policy "strict-origin-when-cross-origin"
+</IfModule>
+
+# ============================================
+# 3. PROTECCIÓN DE ARCHIVOS SENSIBLES
+# ============================================
+
+# Denegar acceso a archivos críticos
+<FilesMatch "\.(htaccess|htpasswd|ini|log|sh|sql|git|env)$">
+    Order Allow,Deny
+    Deny from all
+</FilesMatch>
+
+# ============================================
+# 4. COMPRESIÓN GZIP
+# ============================================
+
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/html
+    AddOutputFilterByType DEFLATE text/css
+    AddOutputFilterByType DEFLATE text/javascript
+    AddOutputFilterByType DEFLATE application/javascript
+    AddOutputFilterByType DEFLATE application/x-javascript
+    AddOutputFilterByType DEFLATE application/json
+    AddOutputFilterByType DEFLATE image/svg+xml
+</IfModule>
+
+# ============================================
+# 5. CACHE DE NAVEGADOR
+# ============================================
+
+<IfModule mod_expires.c>
+    ExpiresActive On
+
+    # Imágenes - 1 año
+    ExpiresByType image/jpg "access plus 1 year"
+    ExpiresByType image/jpeg "access plus 1 year"
+    ExpiresByType image/gif "access plus 1 year"
+    ExpiresByType image/png "access plus 1 year"
+    ExpiresByType image/svg+xml "access plus 1 year"
+    ExpiresByType image/webp "access plus 1 year"
+
+    # CSS y JavaScript - 1 mes
+    ExpiresByType text/css "access plus 1 month"
+    ExpiresByType application/javascript "access plus 1 month"
+    ExpiresByType text/javascript "access plus 1 month"
+
+    # Fuentes - 1 año
+    ExpiresByType font/woff2 "access plus 1 year"
+    ExpiresByType font/woff "access plus 1 year"
+    ExpiresByType font/ttf "access plus 1 year"
+
+    # HTML - sin caché
+    ExpiresByType text/html "access plus 0 seconds"
+</IfModule>
+
+# ============================================
+# 6. DESHABILITAR LISTADO DE DIRECTORIOS
+# ============================================
+
+Options -Indexes
+
+# ============================================
+# 7. UTF-8 ENCODING
+# ============================================
+
+AddDefaultCharset UTF-8
+
+# ============================================
+# 8. PÁGINAS DE ERROR (OPCIONAL)
+# ============================================
+
+# Descomenta estas líneas si quieres páginas de error personalizadas
+# ErrorDocument 404 /index.html
+# ErrorDocument 500 /index.html
+
+# ============================================
+# FIN DE CONFIGURACIÓN BÁSICA
+# ============================================

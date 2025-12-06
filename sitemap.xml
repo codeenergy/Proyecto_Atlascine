@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml"
+        xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+        http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+
+    <!-- Página Principal - Multiidioma -->
+    <url>
+        <loc>https://atlascine.com/</loc>
+        <xhtml:link rel="alternate" hreflang="es" href="https://atlascine.com/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://atlascine.com/?lang=en"/>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://atlascine.com/?lang=ar"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://atlascine.com/?lang=fr"/>
+        <lastmod>2025-11-21</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>1.0</priority>
+    </url>
+
+    <!-- Sección Películas -->
+    <url>
+        <loc>https://atlascine.com/#movies</loc>
+        <lastmod>2025-11-21</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.95</priority>
+    </url>
+
+    <!-- Sección Series -->
+    <url>
+        <loc>https://atlascine.com/#series</loc>
+        <lastmod>2025-11-21</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.95</priority>
+    </url>
+
+    <!-- Sección K-Dramas -->
+    <url>
+        <loc>https://atlascine.com/#kdramas</loc>
+        <lastmod>2025-11-21</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.9</priority>
+    </url>
+
+    <!-- Sección Anime -->
+    <url>
+        <loc>https://atlascine.com/#anime</loc>
+        <lastmod>2025-11-21</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.9</priority>
+    </url>
+
+    <!-- Sección Bollywood -->
+    <url>
+        <loc>https://atlascine.com/#bollywood</loc>
+        <lastmod>2025-11-21</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.85</priority>
+    </url>
+
+    <!-- Sección Series Turcas -->
+    <url>
+        <loc>https://atlascine.com/#turkish</loc>
+        <lastmod>2025-11-21</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.85</priority>
+    </url>
+
+    <!-- Sección Blog -->
+    <url>
+        <loc>https://atlascine.com/#blog</loc>
+        <lastmod>2025-11-21</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <!-- Contenido Netflix -->
+    <url>
+        <loc>https://atlascine.com/#netflix</loc>
+        <lastmod>2025-11-21</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.85</priority>
+    </url>
+
+    <!-- Contenido HBO -->
+    <url>
+        <loc>https://atlascine.com/#hbo</loc>
+        <lastmod>2025-11-21</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.85</priority>
+    </url>
+
+    <!-- Contenido Disney+ -->
+    <url>
+        <loc>https://atlascine.com/#disney</loc>
+        <lastmod>2025-11-21</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.85</priority>
+    </url>
+
+    <!-- Contenido Amazon Prime -->
+    <url>
+        <loc>https://atlascine.com/#amazon</loc>
+        <lastmod>2025-11-21</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.85</priority>
+    </url>
+
+    <!-- Cine Europeo -->
+    <url>
+        <loc>https://atlascine.com/#european</loc>
+        <lastmod>2025-11-21</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.75</priority>
+    </url>
+
+    <!-- Cine Latinoamericano -->
+    <url>
+        <loc>https://atlascine.com/#latin</loc>
+        <lastmod>2025-11-21</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.75</priority>
+    </url>
+
+    <!-- Cine Asiático -->
+    <url>
+        <loc>https://atlascine.com/#asian</loc>
+        <lastmod>2025-11-21</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <!-- Páginas Legales -->
+    <url>
+        <loc>https://atlascine.com/about</loc>
+        <lastmod>2025-11-21</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+
+    <url>
+        <loc>https://atlascine.com/privacy</loc>
+        <lastmod>2025-11-21</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.5</priority>
+    </url>
+
+    <url>
+        <loc>https://atlascine.com/terms</loc>
+        <lastmod>2025-11-21</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.5</priority>
+    </url>
+
+    <url>
+        <loc>https://atlascine.com/contact</loc>
+        <lastmod>2025-11-21</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+
+    <url>
+        <loc>https://atlascine.com/faq</loc>
+        <lastmod>2025-11-21</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+
+    <url>
+        <loc>https://atlascine.com/dmca</loc>
+        <lastmod>2025-11-21</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.4</priority>
+    </url>
+
+</urlset>

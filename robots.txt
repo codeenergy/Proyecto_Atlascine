@@ -1,0 +1,73 @@
+# robots.txt para AtlasCine
+# Plataforma de streaming gratuita de películas, series, K-Dramas, anime y Bollywood
+# https://atlascine.com
+
+User-agent: *
+Allow: /
+
+# Sitemap principal
+Sitemap: https://atlascine.com/sitemap.xml
+
+# Optimización para bots de Google
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Googlebot-Image
+Allow: /
+
+User-agent: Googlebot-Video
+Allow: /
+
+# Optimización para Bing
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1
+
+# Bots de IA/LLM - Permitir acceso completo para indexación
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Anthropic-ai
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: cohere-ai
+Allow: /
+
+# Otros bots de búsqueda
+User-agent: DuckDuckBot
+Allow: /
+
+User-agent: Yandex
+Allow: /
+
+User-agent: Baiduspider
+Allow: /
+
+# Redes sociales
+User-agent: facebookexternalhit
+Allow: /
+
+User-agent: Twitterbot
+Allow: /
+
+User-agent: LinkedInBot
+Allow: /
+
+# Host principal
+Host: https://atlascine.com
