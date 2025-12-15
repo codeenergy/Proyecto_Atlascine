@@ -17,7 +17,12 @@ const sources = {
     dramacool: { loaded: false, count: 0 },
     asiancrush: { loaded: false, count: 0 },
     cinecalidad: { loaded: false, count: 0 },
-    cuevana: { loaded: false, count: 0 }
+    cuevana: { loaded: false, count: 0 },
+    movidy: { loaded: false, count: 0 },
+    soap2day: { loaded: false, count: 0 },
+    fmovies: { loaded: false, count: 0 },
+    primewire: { loaded: false, count: 0 },
+    yesmovies: { loaded: false, count: 0 }
 };
 
 // If auto-loader is enabled, wait for it to load
@@ -164,6 +169,66 @@ try {
     console.warn('⚠️ Cuevana database failed to load:', error);
 }
 
+// Try to load Movidy content (popular movies and trending series)
+try {
+    if (typeof movidy !== 'undefined') {
+        database = database.concat(movidy);
+        sources.movidy.loaded = true;
+        sources.movidy.count = movidy.length;
+        console.log(`✅ Movidy loaded: ${movidy.length} titles`);
+    }
+} catch (error) {
+    console.warn('⚠️ Movidy database failed to load:', error);
+}
+
+// Try to load Soap2Day content (classic movies and popular series)
+try {
+    if (typeof soap2day !== 'undefined') {
+        database = database.concat(soap2day);
+        sources.soap2day.loaded = true;
+        sources.soap2day.count = soap2day.length;
+        console.log(`✅ Soap2Day loaded: ${soap2day.length} titles`);
+    }
+} catch (error) {
+    console.warn('⚠️ Soap2Day database failed to load:', error);
+}
+
+// Try to load FMovies content (action and thrillers)
+try {
+    if (typeof fmovies !== 'undefined') {
+        database = database.concat(fmovies);
+        sources.fmovies.loaded = true;
+        sources.fmovies.count = fmovies.length;
+        console.log(`✅ FMovies loaded: ${fmovies.length} titles`);
+    }
+} catch (error) {
+    console.warn('⚠️ FMovies database failed to load:', error);
+}
+
+// Try to load Primewire content (TV series and dramas)
+try {
+    if (typeof primewire !== 'undefined') {
+        database = database.concat(primewire);
+        sources.primewire.loaded = true;
+        sources.primewire.count = primewire.length;
+        console.log(`✅ Primewire loaded: ${primewire.length} titles`);
+    }
+} catch (error) {
+    console.warn('⚠️ Primewire database failed to load:', error);
+}
+
+// Try to load YesMovies content (family and animation)
+try {
+    if (typeof yesmovies !== 'undefined') {
+        database = database.concat(yesmovies);
+        sources.yesmovies.loaded = true;
+        sources.yesmovies.count = yesmovies.length;
+        console.log(`✅ YesMovies loaded: ${yesmovies.length} titles`);
+    }
+} catch (error) {
+    console.warn('⚠️ YesMovies database failed to load:', error);
+}
+
     // Log stats for static mode
     logDatabaseStats();
 
@@ -171,7 +236,7 @@ try {
 
 // Function to log database statistics
 function logDatabaseStats() {
-    console.log(`\n📊 Database Status:`);
+    console.log(`\n📊 Database Status (15 Fuentes):`);
     console.log(`   Total titles: ${database.length}`);
     console.log(`   HDToday: ${sources.hdtoday.loaded ? '✅' : '❌'} (${sources.hdtoday.count} titles)`);
     console.log(`   Lodynet: ${sources.lodynet.loaded ? '✅' : '❌'} (${sources.lodynet.count} titles)`);
@@ -182,7 +247,12 @@ function logDatabaseStats() {
     console.log(`   DramaCool: ${sources.dramacool.loaded ? '✅' : '❌'} (${sources.dramacool.count} titles)`);
     console.log(`   AsianCrush: ${sources.asiancrush.loaded ? '✅' : '❌'} (${sources.asiancrush.count} titles)`);
     console.log(`   Cinecalidad: ${sources.cinecalidad.loaded ? '✅' : '❌'} (${sources.cinecalidad.count} titles)`);
-    console.log(`   Cuevana: ${sources.cuevana.loaded ? '✅' : '❌'} (${sources.cuevana.count} titles)\n`);
+    console.log(`   Cuevana: ${sources.cuevana.loaded ? '✅' : '❌'} (${sources.cuevana.count} titles)`);
+    console.log(`   Movidy: ${sources.movidy.loaded ? '✅' : '❌'} (${sources.movidy.count} titles)`);
+    console.log(`   Soap2Day: ${sources.soap2day.loaded ? '✅' : '❌'} (${sources.soap2day.count} titles)`);
+    console.log(`   FMovies: ${sources.fmovies.loaded ? '✅' : '❌'} (${sources.fmovies.count} titles)`);
+    console.log(`   Primewire: ${sources.primewire.loaded ? '✅' : '❌'} (${sources.primewire.count} titles)`);
+    console.log(`   YesMovies: ${sources.yesmovies.loaded ? '✅' : '❌'} (${sources.yesmovies.count} titles)\n`);
 
     // Warn if no content loaded
     if (database.length === 0) {

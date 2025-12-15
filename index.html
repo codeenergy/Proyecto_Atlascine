@@ -817,6 +817,12 @@
     <script src="js/databases/asiancrush.js" data-allowed></script>
     <script src="js/databases/cinecalidad.js" data-allowed></script>
     <script src="js/databases/cuevana.js" data-allowed></script>
+    <!-- Nuevas fuentes de datos (11-15) -->
+    <script src="js/databases/movidy.js" data-allowed></script>
+    <script src="js/databases/soap2day.js" data-allowed></script>
+    <script src="js/databases/fmovies.js" data-allowed></script>
+    <script src="js/databases/primewire.js" data-allowed></script>
+    <script src="js/databases/yesmovies.js" data-allowed></script>
 
     <!-- Combine databases -->
     <script src="js/databases/index.js" data-allowed></script>
@@ -837,10 +843,10 @@
 // ====================================
 
 const AdConfig = {
-    // Tiempos reducidos para mostrar anuncios más frecuentemente
-    initialDelay: 9000,      // 9 segundos (antes 5)
-    rotationInterval: 240000, // 4 minutos (antes 15 min)
-    maxAdsPerSession: 6,    // Máximo de anuncios por sesión
+    // Configuración optimizada para mejor experiencia de usuario
+    initialDelay: 9000,      // 9 segundos antes del primer anuncio
+    rotationInterval: 900000, // 15 minutos entre anuncios (para ver películas/series tranquilamente)
+    maxAdsPerSession: 8,    // Máximo de anuncios por sesión
     currentAdCount: 0
 };
 

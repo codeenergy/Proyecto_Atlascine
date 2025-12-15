@@ -504,36 +504,15 @@ function playContent() {
             <!-- Selector de Servidores -->
             <div style="padding: 15px 20px; background: rgba(0,0,0,0.2);" id="serverSelection">
                 <p style="margin-bottom: 12px; font-size: 13px; color: rgba(255,255,255,0.6);">🖥️ Selecciona servidor:</p>
-                <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                <div style="display: flex; gap: 10px; flex-wrap: wrap; justify-content: center;">
                     <button onclick="changeServer(0)" class="server-btn active" data-server="0">
-                        <span style="font-size: 16px;">🌐</span> Servidor 1
+                        <span style="font-size: 16px;">🌐</span> VidSrc
                     </button>
                     <button onclick="changeServer(1)" class="server-btn" data-server="1">
-                        <span style="font-size: 16px;">🚀</span> Servidor 2
+                        <span style="font-size: 16px;">🚀</span> VidSrc Pro
                     </button>
                     <button onclick="changeServer(2)" class="server-btn" data-server="2">
-                        <span style="font-size: 16px;">⚡</span> Servidor 3
-                    </button>
-                    <button onclick="changeServer(3)" class="server-btn" data-server="3">
-                        <span style="font-size: 16px;">🔥</span> Servidor 4
-                    </button>
-                    <button onclick="changeServer(4)" class="server-btn" data-server="4">
-                        <span style="font-size: 16px;">💎</span> Servidor 5
-                    </button>
-                    <button onclick="changeServer(5)" class="server-btn" data-server="5">
-                        <span style="font-size: 16px;">🎯</span> Servidor 6
-                    </button>
-                    <button onclick="changeServer(6)" class="server-btn" data-server="6">
-                        <span style="font-size: 16px;">⭐</span> Servidor 7
-                    </button>
-                    <button onclick="changeServer(7)" class="server-btn" data-server="7">
-                        <span style="font-size: 16px;">🎬</span> Servidor 8
-                    </button>
-                    <button onclick="changeServer(8)" class="server-btn" data-server="8">
-                        <span style="font-size: 16px;">🌟</span> Servidor 9
-                    </button>
-                    <button onclick="changeServer(9)" class="server-btn" data-server="9">
-                        <span style="font-size: 16px;">🎪</span> Servidor 10
+                        <span style="font-size: 16px;">🔒</span> EmbedSu
                     </button>
                 </div>
                 <div style="margin-top: 12px; padding: 10px; background: rgba(229,9,20,0.1); border-left: 3px solid #e50914; border-radius: 4px;">
@@ -668,33 +647,19 @@ function updateVideoSource() {
         const s = window.playerState.season;
         const e = window.playerState.episode;
 
-        // URLs con temporada y episodio
+        // URLs con temporada y episodio (3 servidores seguros y confiables)
         const sources = [
             `https://vidsrc.xyz/embed/${videoType}/${selectedContent.tmdbId}/${s}/${e}`,
             `https://vidsrc.to/embed/${videoType}/${selectedContent.tmdbId}/${s}/${e}`,
-            `https://www.2embed.cc/embedtv/${selectedContent.tmdbId}&s=${s}&e=${e}`,
-            `https://multiembed.mov/?video_id=${selectedContent.tmdbId}&tmdb=1&s=${s}&e=${e}`,
-            `https://vidsrc.me/embed/${videoType}/${selectedContent.tmdbId}/${s}-${e}`,
-            `https://www.2embed.to/embed/tmdb/${videoType}?id=${selectedContent.tmdbId}&s=${s}&e=${e}`,
-            `https://vidsrc.cc/v2/embed/${videoType}/${selectedContent.tmdbId}/${s}/${e}`,
-            `https://embed.su/embed/${videoType}/${selectedContent.tmdbId}/${s}/${e}`,
-            `https://vidsrc.pm/embed/${videoType}/${selectedContent.tmdbId}/${s}/${e}`,
-            `https://vidsrc.icu/embed/${videoType}/${selectedContent.tmdbId}/${s}/${e}`
+            `https://embed.su/embed/${videoType}/${selectedContent.tmdbId}/${s}/${e}`
         ];
         url = sources[serverIndex] || sources[0];
     } else {
-        // URLs para películas
+        // URLs para películas (3 servidores seguros y confiables)
         const sources = [
             `https://vidsrc.xyz/embed/${videoType}/${selectedContent.tmdbId}`,
             `https://vidsrc.to/embed/${videoType}/${selectedContent.tmdbId}`,
-            `https://www.2embed.cc/embed/${selectedContent.tmdbId}`,
-            `https://multiembed.mov/?video_id=${selectedContent.tmdbId}&tmdb=1`,
-            `https://vidsrc.me/embed/${videoType}/${selectedContent.tmdbId}`,
-            `https://www.2embed.to/embed/tmdb/${videoType}?id=${selectedContent.tmdbId}`,
-            `https://vidsrc.cc/v2/embed/${videoType}/${selectedContent.tmdbId}`,
-            `https://embed.su/embed/${videoType}/${selectedContent.tmdbId}`,
-            `https://vidsrc.pm/embed/${videoType}/${selectedContent.tmdbId}`,
-            `https://vidsrc.icu/embed/${videoType}/${selectedContent.tmdbId}`
+            `https://embed.su/embed/${videoType}/${selectedContent.tmdbId}`
         ];
         url = sources[serverIndex] || sources[0];
     }
