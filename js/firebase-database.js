@@ -195,14 +195,20 @@ async function initFirebaseDatabase() {
     // Cargar contenido
     const content = await loadAllContent(FIREBASE_SOURCES);
 
-    // Disparar evento con el contenido cargado
+    // Hacer disponible globalmente para app.js
+    window.database = content;
+
+    // Disparar evento con el contenido cargado para compatibilidad
     const event = new CustomEvent('firebaseContentLoaded', {
         detail: {
             content: content,
-            sources: FIREBASE_SOURCES
+            sources: FIREBASE_SOURCES,
+            database: content
         }
     });
     window.dispatchEvent(event);
+
+    console.log(`✅ Database cargado: ${content.length} items disponibles`);
 
     return content;
 }

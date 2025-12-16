@@ -795,37 +795,30 @@
     <script src="js/tmdb-cache.js" data-allowed></script>
 
     <!-- ============================================ -->
-    <!-- TMDB Auto-Loader (DESACTIVADO - usando archivos estáticos) -->
+    <!-- FIREBASE INTEGRATION - Sistema de Base de Datos en Tiempo Real -->
     <!-- ============================================ -->
-    <!-- Para activar actualización automática, descomenta las 3 líneas siguientes -->
-    <!-- y comenta los archivos de base de datos estáticos -->
+    <!-- Firebase SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-analytics-compat.js"></script>
 
-    <!-- <script>window.USE_TMDB_AUTO_LOADER = true;</script> -->
-    <!-- <script src="js/databases/tmdb-auto-loader.js" data-allowed></script> -->
-    <!-- <script>initAutoLoader();</script> -->
+    <!-- Firebase Configuration & Database Manager -->
+    <script src="js/firebase-config.js" data-allowed></script>
+    <script src="js/firebase-database.js" data-allowed></script>
 
-    <!-- ============================================ -->
-    <!-- Load database sources (ACTIVADO - archivos estáticos) -->
-    <!-- ============================================ -->
-    <script src="js/databases/hdtoday.js" data-allowed></script>
-    <script src="js/databases/lodynet.js" data-allowed></script>
-    <script src="js/databases/aradramatv.js" data-allowed></script>
-    <script src="js/databases/pelisflix.js" data-allowed></script>
-    <script src="js/databases/vidsrc.js" data-allowed></script>
-    <script src="js/databases/embedsu.js" data-allowed></script>
-    <script src="js/databases/dramacool.js" data-allowed></script>
-    <script src="js/databases/asiancrush.js" data-allowed></script>
-    <script src="js/databases/cinecalidad.js" data-allowed></script>
-    <script src="js/databases/cuevana.js" data-allowed></script>
-    <!-- Nuevas fuentes de datos (11-15) -->
-    <script src="js/databases/movidy.js" data-allowed></script>
-    <script src="js/databases/soap2day.js" data-allowed></script>
-    <script src="js/databases/fmovies.js" data-allowed></script>
-    <script src="js/databases/primewire.js" data-allowed></script>
-    <script src="js/databases/yesmovies.js" data-allowed></script>
+    <!-- Initialize Firebase -->
+    <script>
+        // Inicializar Firebase y cargar datos
+        window.addEventListener('DOMContentLoaded', async () => {
+            console.log('🔥 Iniciando AtlasCine con Firebase...');
 
-    <!-- Combine databases -->
-    <script src="js/databases/index.js" data-allowed></script>
+            // Inicializar Firebase
+            initializeFirebase();
+
+            // Cargar contenido desde Firebase
+            await initFirebaseDatabase();
+        });
+    </script>
 
     <!-- Main application -->
     <script src="js/app.js"></script>
