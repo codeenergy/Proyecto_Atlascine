@@ -206,8 +206,20 @@ function getFilteredContent() {
     return database;
 }
 
-// Initialize
-document.addEventListener('DOMContentLoaded', () => {
+// Initialize App Function - Called after Firebase loads data
+function initializeApp() {
+    console.log('🚀 Inicializando AtlasCine App...');
+
+    // Verificar que database esté disponible
+    if (!window.database || window.database.length === 0) {
+        console.warn('⚠️ Database aún no está cargado, esperando...');
+        // Reintentar después de 1 segundo
+        setTimeout(initializeApp, 1000);
+        return;
+    }
+
+    console.log(`✅ Database disponible: ${window.database.length} items`);
+
     // Set initial language
     const savedLang = localStorage.getItem('atlascine_language') || 'es';
     currentLanguage = savedLang;
@@ -227,7 +239,12 @@ document.addEventListener('DOMContentLoaded', () => {
     setupScrollNav();
     generateTrendingTopics();
     loadNewsFeed(); // Load weekly entertainment news
-});
+
+    console.log('🎉 AtlasCine listo!');
+}
+
+// Hacer la función disponible globalmente
+window.initializeApp = initializeApp;
 
 // Render Home sections
 function renderHome() {
