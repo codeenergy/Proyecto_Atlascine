@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🔄 Sincronizando AtlasCine...</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #fff;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border-radius: 24px;
+            padding: 50px;
+            max-width: 600px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+
+        .status {
+            font-size: 24px;
+            margin-bottom: 30px;
+            font-weight: 600;
+        }
+
+        .progress {
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 12px;
+            height: 12px;
+            overflow: hidden;
+            margin-bottom: 30px;
+        }
+
+        .progress-bar {
+            background: linear-gradient(90deg, #46d369 0%, #01b4e4 100%);
+            height: 100%;
+            width: 0%;
+            transition: width 0.5s ease;
+            border-radius: 12px;
+        }
+
+        .log {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 12px;
+            padding: 20px;
+            max-height: 300px;
+            overflow-y: auto;
+            text-align: left;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+        }
+
+        .log-entry {
+            padding: 8px;
+            margin-bottom: 5px;
+            border-left: 3px solid rgba(255, 255, 255, 0.3);
+            padding-left: 12px;
+        }
+
+        .log-entry.success {
+            border-color: #46d369;
+            color: #46d369;
+        }
+
+        .log-entry.error {
+            border-color: #e50914;
+            color: #e50914;
+        }
+
+        .log-entry.info {
+            border-color: #01b4e4;
+            color: #01b4e4;
+        }
+
+        .spinner {
+            border: 4px solid rgba(255, 255, 255, 0.1);
+            border-top-color: #fff;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            animation: spin 1s linear infinite;
+            margin: 30px auto;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .success-icon {
+            font-size: 100px;
+            margin: 30px 0;
+            display: none;
+        }
+
+        .btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            color: #fff;
+            padding: 15px 40px;
+            border-radius: 12px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 20px;
+            display: none;
+        }
+
+        .btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔄</h1>
+        <div class="status" id="status">Iniciando sincronización...</div>
+
+        <div class="progress">
+            <div class="progress-bar" id="progressBar"></div>
+        </div>
+
+        <div class="spinner" id="spinner"></div>
+        <div class="success-icon" id="successIcon">✅</div>
+
+        <div class="log" id="log"></div>
+
+        <button class="btn" id="goToSite" onclick="window.location.href='index.html'">
+            🎬 Ir a AtlasCine
+        </button>
+    </div>
+
+    <!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-analytics-compat.js"></script>
+
+    <!-- Scripts -->
+    <script src="js/firebase-config.js"></script>
+    <script src="js/tmdb-to-firebase.js"></script>
+
+    <script>
+        const statusEl = document.getElementById('status');
+        const progressBar = document.getElementById('progressBar');
+        const logEl = document.getElementById('log');
+        const spinner = document.getElementById('spinner');
+        const successIcon = document.getElementById('successIcon');
+        const goToSiteBtn = document.getElementById('goToSite');
+
+        function addLog(message, type = 'info') {
+            const entry = document.createElement('div');
+            entry.className = `log-entry ${type}`;
+            entry.textContent = `${new Date().toLocaleTimeString()} - ${message}`;
+            logEl.insertBefore(entry, logEl.firstChild);
+        }
+
+        function updateProgress(percent) {
+            progressBar.style.width = percent + '%';
+        }
+
+        function updateStatus(message) {
+            statusEl.textContent = message;
+        }
+
+        async function syncAll() {
+            try {
+                updateStatus('🔥 Inicializando Firebase...');
+                addLog('Inicializando Firebase...', 'info');
+                initializeFirebase();
+                updateProgress(10);
+
+                await new Promise(resolve => setTimeout(resolve, 1000));
+
+                updateStatus('📥 Cargando películas trending...');
+                addLog('Sincronizando películas trending...', 'info');
+                const movies1 = await syncTrendingMovies(3);
+                addLog(`✅ ${movies1} películas trending guardadas`, 'success');
+                updateProgress(25);
+
+                updateStatus('📥 Cargando películas populares...');
+                addLog('Sincronizando películas populares...', 'info');
+                const movies2 = await syncPopularMovies(3);
+                addLog(`✅ ${movies2} películas populares guardadas`, 'success');
+                updateProgress(40);
+
+                updateStatus('📥 Cargando series trending...');
+                addLog('Sincronizando series trending...', 'info');
+                const series1 = await syncTrendingSeries(3);
+                addLog(`✅ ${series1} series trending guardadas`, 'success');
+                updateProgress(55);
+
+                updateStatus('📥 Cargando series populares...');
+                addLog('Sincronizando series populares...', 'info');
+                const series2 = await syncPopularSeries(3);
+                addLog(`✅ ${series2} series populares guardadas`, 'success');
+                updateProgress(70);
+
+                updateStatus('📥 Cargando anime...');
+                addLog('Sincronizando anime...', 'info');
+                const anime = await window.syncAnime(3);
+                addLog(`✅ ${anime} anime guardados`, 'success');
+                updateProgress(85);
+
+                updateStatus('📥 Cargando K-Dramas...');
+                addLog('Sincronizando K-Dramas...', 'info');
+                const kdramas = await window.syncKDramas(3);
+                addLog(`✅ ${kdramas} K-Dramas guardados`, 'success');
+                updateProgress(100);
+
+                const total = movies1 + movies2 + series1 + series2 + anime + kdramas;
+
+                updateStatus('✅ ¡Sincronización completada!');
+                addLog(`🎉 Total: ${total} contenidos guardados en Firebase`, 'success');
+                addLog('Firebase está listo para usar', 'success');
+
+                spinner.style.display = 'none';
+                successIcon.style.display = 'block';
+                goToSiteBtn.style.display = 'inline-block';
+
+            } catch (error) {
+                updateStatus('❌ Error en la sincronización');
+                addLog(`Error: ${error.message}`, 'error');
+                spinner.style.display = 'none';
+            }
+        }
+
+        // Iniciar automáticamente al cargar
+        window.addEventListener('DOMContentLoaded', () => {
+            addLog('Página cargada. Iniciando sync...', 'info');
+            setTimeout(syncAll, 1000);
+        });
+    </script>
+</body>
+</html>
