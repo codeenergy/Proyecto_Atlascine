@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AtlasCine - Admin Sync</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #fff;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 800px;
+            width: 100%;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            font-size: 36px;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .subtitle {
+            text-align: center;
+            opacity: 0.8;
+            margin-bottom: 40px;
+        }
+
+        .info-box {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+
+        .info-box h2 {
+            font-size: 18px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .info-box ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .info-box li {
+            padding: 8px 0;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .info-box li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #46d369;
+            font-weight: bold;
+        }
+
+        .btn-group {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            color: #fff;
+            padding: 15px 20px;
+            border-radius: 12px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+        }
+
+        .btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-color: transparent;
+            font-size: 18px;
+            padding: 20px;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .btn-danger {
+            background: rgba(229, 9, 20, 0.3);
+            border-color: rgba(229, 9, 20, 0.5);
+        }
+
+        .btn-danger:hover {
+            background: rgba(229, 9, 20, 0.5);
+        }
+
+        .status-box {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 30px;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .status-box h3 {
+            font-size: 16px;
+            margin-bottom: 15px;
+        }
+
+        .log-entry {
+            padding: 8px;
+            margin-bottom: 5px;
+            border-left: 3px solid rgba(255, 255, 255, 0.3);
+            padding-left: 12px;
+            font-size: 14px;
+            font-family: 'Courier New', monospace;
+        }
+
+        .log-entry.success {
+            border-color: #46d369;
+            color: #46d369;
+        }
+
+        .log-entry.error {
+            border-color: #e50914;
+            color: #e50914;
+        }
+
+        .log-entry.info {
+            border-color: #01b4e4;
+            color: #01b4e4;
+        }
+
+        .spinner {
+            border: 3px solid rgba(255, 255, 255, 0.1);
+            border-top-color: #fff;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
+            display: none;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .spinner.active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔄 AtlasCine Admin</h1>
+        <p class="subtitle">Sincronización TMDB → Firebase</p>
+
+        <div class="info-box">
+            <h2>📋 Instrucciones</h2>
+            <ul>
+                <li>Haz clic en "Sincronizar Todo" para cargar datos desde TMDB</li>
+                <li>Se cargarán ~300 películas, series, anime y k-dramas</li>
+                <li>Los datos se guardarán en Firebase Firestore</li>
+                <li>El proceso toma aproximadamente 2-3 minutos</li>
+                <li>Solo necesitas hacer esto UNA VEZ</li>
+            </ul>
+        </div>
+
+        <div class="info-box">
+            <h2>🎬 Contenido que se sincronizará:</h2>
+            <ul>
+                <li>Películas Trending (60 items)</li>
+                <li>Películas Populares (60 items)</li>
+                <li>Series Trending (60 items)</li>
+                <li>Series Populares (60 items)</li>
+                <li>Anime (60 items)</li>
+                <li>K-Dramas (60 items)</li>
+            </ul>
+        </div>
+
+        <button class="btn btn-primary" onclick="syncAll()">
+            🚀 Sincronizar Todo (TMDB → Firebase)
+        </button>
+
+        <div class="btn-group">
+            <button class="btn" onclick="syncMovies()">📽️ Solo Películas</button>
+            <button class="btn" onclick="syncSeries()">📺 Solo Series</button>
+            <button class="btn" onclick="syncAnime()">🎌 Solo Anime</button>
+            <button class="btn" onclick="syncKDramas()">🇰🇷 Solo K-Dramas</button>
+        </div>
+
+        <button class="btn btn-danger" onclick="clearAll()" style="width: 100%;">
+            🗑️ Limpiar Todo (Usar con cuidado)
+        </button>
+
+        <div class="status-box">
+            <h3>📊 Estado de Sincronización</h3>
+            <div class="spinner" id="spinner"></div>
+            <div id="logContainer"></div>
+        </div>
+    </div>
+
+    <!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-analytics-compat.js"></script>
+
+    <!-- Config -->
+    <script src="js/firebase-config.js"></script>
+    <script src="js/tmdb-to-firebase.js"></script>
+
+    <script>
+        // Inicializar Firebase
+        initializeFirebase();
+
+        // Log container
+        const logContainer = document.getElementById('logContainer');
+        const spinner = document.getElementById('spinner');
+
+        function addLog(message, type = 'info') {
+            const entry = document.createElement('div');
+            entry.className = `log-entry ${type}`;
+            entry.textContent = `${new Date().toLocaleTimeString()} - ${message}`;
+            logContainer.insertBefore(entry, logContainer.firstChild);
+        }
+
+        function showSpinner() {
+            spinner.classList.add('active');
+        }
+
+        function hideSpinner() {
+            spinner.classList.remove('active');
+        }
+
+        async function syncAll() {
+            addLog('Iniciando sincronización completa...', 'info');
+            showSpinner();
+
+            try {
+                const result = await syncAllContent();
+
+                if (result.success) {
+                    addLog(`✅ Sincronización completa! ${result.total} items guardados en ${result.duration}s`, 'success');
+                } else {
+                    addLog('❌ Error en la sincronización', 'error');
+                }
+            } catch (error) {
+                addLog(`❌ Error: ${error.message}`, 'error');
+            } finally {
+                hideSpinner();
+            }
+        }
+
+        async function syncMovies() {
+            addLog('Sincronizando películas...', 'info');
+            showSpinner();
+
+            try {
+                const trending = await syncTrendingMovies(3);
+                const popular = await syncPopularMovies(3);
+                addLog(`✅ ${trending + popular} películas guardadas`, 'success');
+            } catch (error) {
+                addLog(`❌ Error: ${error.message}`, 'error');
+            } finally {
+                hideSpinner();
+            }
+        }
+
+        async function syncSeries() {
+            addLog('Sincronizando series...', 'info');
+            showSpinner();
+
+            try {
+                const trending = await syncTrendingSeries(3);
+                const popular = await syncPopularSeries(3);
+                addLog(`✅ ${trending + popular} series guardadas`, 'success');
+            } catch (error) {
+                addLog(`❌ Error: ${error.message}`, 'error');
+            } finally {
+                hideSpinner();
+            }
+        }
+
+        async function syncAnime() {
+            addLog('Sincronizando anime...', 'info');
+            showSpinner();
+
+            try {
+                const total = await window.syncAnime(3);
+                addLog(`✅ ${total} anime guardados`, 'success');
+            } catch (error) {
+                addLog(`❌ Error: ${error.message}`, 'error');
+            } finally {
+                hideSpinner();
+            }
+        }
+
+        async function syncKDramas() {
+            addLog('Sincronizando K-Dramas...', 'info');
+            showSpinner();
+
+            try {
+                const total = await window.syncKDramas(3);
+                addLog(`✅ ${total} K-Dramas guardados`, 'success');
+            } catch (error) {
+                addLog(`❌ Error: ${error.message}`, 'error');
+            } finally {
+                hideSpinner();
+            }
+        }
+
+        async function clearAll() {
+            if (!confirm('¿Estás SEGURO de que quieres ELIMINAR todos los datos de Firebase?')) {
+                return;
+            }
+
+            addLog('Eliminando todos los datos...', 'info');
+            showSpinner();
+
+            try {
+                await clearCollection();
+                addLog('✅ Todos los datos eliminados', 'success');
+            } catch (error) {
+                addLog(`❌ Error: ${error.message}`, 'error');
+            } finally {
+                hideSpinner();
+            }
+        }
+
+        // Log inicial
+        addLog('Admin Panel cargado. Listo para sincronizar.', 'success');
+    </script>
+</body>
+</html>
