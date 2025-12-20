@@ -186,19 +186,88 @@ const FIREBASE_SOURCES = [
 ];
 
 // ====================================
-// INICIALIZACIÓN
+// AUTO-SYNC desde TMDB si Firebase vacío
+// ====================================
+
+async function autoSyncFromTMDB() {
+    console.log('%c🔄 Auto-Sync desde TMDB', 'font-size: 14px; font-weight: bold; color: #01b4e4;');
+    console.log('%c⏳ Firebase vacío detectado. Sincronizando automáticamente...', 'color: #999;');
+
+    try {
+        // Cargar script de sync si no está cargado
+        if (!window.syncAllContent) {
+            await loadScript('js/tmdb-to-firebase.js');
+            await new Promise(resolve => setTimeout(resolve, 500));
+        }
+
+        // Ejecutar sincronización automática
+        if (window.syncAllContent) {
+            const result = await window.syncAllContent();
+
+            if (result.success) {
+                console.log(`%c✅ Auto-sync completado! ${result.total} items guardados`, 'color: #46d369; font-weight: bold;');
+                return true;
+            }
+        }
+
+        return false;
+    } catch (error) {
+        console.error('❌ Error en auto-sync:', error);
+        return false;
+    }
+}
+
+// Helper para cargar scripts dinámicamente
+function loadScript(src) {
+    return new Promise((resolve, reject) => {
+        const script = document.createElement('script');
+        script.src = src;
+        script.onload = resolve;
+        script.onerror = reject;
+        document.head.appendChild(script);
+    });
+}
+
+// ====================================
+// INICIALIZACIÓN CON AUTO-SYNC
 // ====================================
 
 async function initFirebaseDatabase() {
     console.log('%c🔥 Firebase Database Manager', 'font-size: 14px; font-weight: bold; color: #FFA000;');
 
-    // Cargar contenido
+    // Intentar cargar contenido existente
     const content = await loadAllContent(FIREBASE_SOURCES);
+
+    // Si Firebase está vacío o tiene muy pocos datos, auto-sincronizar
+    if (content.length < 50) {
+        console.log('%c⚠️ Firebase tiene pocos datos. Iniciando auto-sync...', 'color: #ff9800;');
+
+        const synced = await autoSyncFromTMDB();
+
+        if (synced) {
+            // Recargar contenido después del sync
+            const newContent = await loadAllContent(FIREBASE_SOURCES);
+            window.database = newContent;
+
+            console.log(`✅ Database auto-sincronizado: ${newContent.length} items disponibles`);
+
+            const event = new CustomEvent('firebaseContentLoaded', {
+                detail: {
+                    content: newContent,
+                    sources: FIREBASE_SOURCES,
+                    database: newContent
+                }
+            });
+            window.dispatchEvent(event);
+
+            return newContent;
+        }
+    }
 
     // Hacer disponible globalmente para app.js
     window.database = content;
 
-    // Disparar evento con el contenido cargado para compatibilidad
+    // Disparar evento con el contenido cargado
     const event = new CustomEvent('firebaseContentLoaded', {
         detail: {
             content: content,
