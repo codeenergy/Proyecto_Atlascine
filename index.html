@@ -905,6 +905,7 @@
 
     <!-- Firebase Configuration & Database Manager -->
     <script src="js/firebase-config.js" data-allowed></script>
+    <script src="js/tmdb-to-firebase.js" data-allowed></script>
     <script src="js/firebase-database.js" data-allowed></script>
 
     <!-- Main application -->
@@ -918,10 +919,10 @@
             // Inicializar Firebase
             initializeFirebase();
 
-            // Cargar contenido desde Firebase
+            // Cargar contenido desde Firebase (auto-sincroniza si está vacío)
             const content = await initFirebaseDatabase();
 
-            // Inicializar la app
+            // Inicializar la app siempre (navegación funciona aunque no haya datos)
             if (window.initializeApp) {
                 window.initializeApp();
             }

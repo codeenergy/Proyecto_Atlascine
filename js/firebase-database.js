@@ -72,8 +72,7 @@ async function loadFromFirebase(source) {
         const db = firebase.firestore();
         const snapshot = await db.collection(COLLECTION_NAME)
             .where('source', '==', source)
-            .orderBy('rating', 'desc')
-            .limit(50)
+            .limit(100)
             .get();
 
         const content = [];
@@ -167,22 +166,10 @@ function clearCache() {
 // ====================================
 
 const FIREBASE_SOURCES = [
-    'hdtoday',
-    'lodynet',
-    'aradramatv',
-    'pelisflix',
-    'vidsrc',
-    'embedsu',
-    'dramacool',
-    'asiancrush',
-    'cinecalidad',
-    'cuevana',
-    // Nuevas fuentes (hasta 15 total)
-    'movidy',
-    'soap2day',
-    'fmovies',
-    'primewire',
-    'yesmovies'
+    'tmdb-trending',
+    'tmdb-popular',
+    'tmdb-anime',
+    'tmdb-kdrama'
 ];
 
 // ====================================
@@ -194,20 +181,19 @@ async function autoSyncFromTMDB() {
     console.log('%c⏳ Firebase vacío detectado. Sincronizando automáticamente...', 'color: #999;');
 
     try {
-        // Cargar script de sync si no está cargado
+        // Verificar que syncAllContent esté disponible
         if (!window.syncAllContent) {
-            await loadScript('js/tmdb-to-firebase.js');
-            await new Promise(resolve => setTimeout(resolve, 500));
+            console.error('❌ syncAllContent no está disponible. Asegúrate de que tmdb-to-firebase.js esté cargado.');
+            return false;
         }
 
         // Ejecutar sincronización automática
-        if (window.syncAllContent) {
-            const result = await window.syncAllContent();
+        console.log('%c📥 Descargando contenido de TMDB...', 'color: #01b4e4;');
+        const result = await window.syncAllContent();
 
-            if (result.success) {
-                console.log(`%c✅ Auto-sync completado! ${result.total} items guardados`, 'color: #46d369; font-weight: bold;');
-                return true;
-            }
+        if (result.success) {
+            console.log(`%c✅ Auto-sync completado! ${result.total} items guardados en Firebase`, 'color: #46d369; font-weight: bold;');
+            return true;
         }
 
         return false;
@@ -217,17 +203,6 @@ async function autoSyncFromTMDB() {
     }
 }
 
-// Helper para cargar scripts dinámicamente
-function loadScript(src) {
-    return new Promise((resolve, reject) => {
-        const script = document.createElement('script');
-        script.src = src;
-        script.onload = resolve;
-        script.onerror = reject;
-        document.head.appendChild(script);
-    });
-}
-
 // ====================================
 // INICIALIZACIÓN CON AUTO-SYNC
 // ====================================
@@ -235,32 +210,59 @@ function loadScript(src) {
 async function initFirebaseDatabase() {
     console.log('%c🔥 Firebase Database Manager', 'font-size: 14px; font-weight: bold; color: #FFA000;');
 
-    // Intentar cargar contenido existente
-    const content = await loadAllContent(FIREBASE_SOURCES);
+    // Intentar cargar contenido existente desde fuentes específicas
+    let content = await loadAllContent(FIREBASE_SOURCES);
 
-    // Si Firebase está vacío o tiene muy pocos datos, auto-sincronizar
-    if (content.length < 50) {
-        console.log('%c⚠️ Firebase tiene pocos datos. Iniciando auto-sync...', 'color: #ff9800;');
+    // Si no hay contenido de fuentes específicas, intentar cargar TODO
+    if (content.length === 0) {
+        console.log('%c⚠️ No se encontraron fuentes específicas. Cargando TODO el contenido...', 'color: #ff9800;');
+        try {
+            const db = firebase.firestore();
+            const snapshot = await db.collection(COLLECTION_NAME)
+                .limit(500)
+                .get();
+
+            content = [];
+            snapshot.forEach(doc => {
+                content.push({
+                    id: doc.id,
+                    ...doc.data()
+                });
+            });
+
+            console.log(`📥 Contenido total cargado: ${content.length} items`);
+        } catch (error) {
+            console.error('❌ Error cargando contenido total:', error);
+        }
+    }
+
+    // Si Firebase está vacío, auto-sincronizar desde TMDB
+    if (content.length === 0) {
+        console.log('%c⚠️ Firebase está vacío. Iniciando auto-sync desde TMDB...', 'color: #ff9800;');
+        console.log('%c📦 Esto puede tardar 1-2 minutos. Por favor espera...', 'color: #999;');
 
         const synced = await autoSyncFromTMDB();
 
         if (synced) {
-            // Recargar contenido después del sync
-            const newContent = await loadAllContent(FIREBASE_SOURCES);
-            window.database = newContent;
+            // Recargar TODO el contenido después del sync
+            try {
+                const db = firebase.firestore();
+                const snapshot = await db.collection(COLLECTION_NAME)
+                    .limit(500)
+                    .get();
 
-            console.log(`✅ Database auto-sincronizado: ${newContent.length} items disponibles`);
+                content = [];
+                snapshot.forEach(doc => {
+                    content.push({
+                        id: doc.id,
+                        ...doc.data()
+                    });
+                });
 
-            const event = new CustomEvent('firebaseContentLoaded', {
-                detail: {
-                    content: newContent,
-                    sources: FIREBASE_SOURCES,
-                    database: newContent
-                }
-            });
-            window.dispatchEvent(event);
-
-            return newContent;
+                console.log(`✅ Database auto-sincronizado: ${content.length} items disponibles`);
+            } catch (error) {
+                console.error('❌ Error recargando contenido:', error);
+            }
         }
     }
 
@@ -277,7 +279,7 @@ async function initFirebaseDatabase() {
     });
     window.dispatchEvent(event);
 
-    console.log(`✅ Database cargado: ${content.length} items disponibles`);
+    console.log(`✅ Database final: ${content.length} items disponibles`);
 
     return content;
 }

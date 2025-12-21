@@ -93,3 +93,5 @@ coverage/
 .htpasswd
 error_log
 access_log
+
+.vercel

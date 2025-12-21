@@ -87,9 +87,10 @@ function convertToFirebaseFormat(item, type, source = 'tmdb') {
         // Idioma y región
         language: mapLanguage(item.original_language),
         region: mapRegion(item.origin_country?.[0] || item.original_language),
+        country: mapRegion(item.origin_country?.[0] || item.original_language),
 
-        // Géneros
-        genres: genreNames,
+        // Géneros (usar "genre" para consistencia con app.js)
+        genre: genreNames,
 
         // Imágenes
         poster: item.poster_path ? `${TMDB_SYNC_CONFIG.imageBase}/w500${item.poster_path}` : '',

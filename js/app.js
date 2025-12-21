@@ -210,15 +210,12 @@ function getFilteredContent() {
 function initializeApp() {
     console.log('🚀 Inicializando AtlasCine App...');
 
-    // Verificar que database esté disponible
-    if (!window.database || window.database.length === 0) {
-        console.warn('⚠️ Database aún no está cargado, esperando...');
-        // Reintentar después de 1 segundo
-        setTimeout(initializeApp, 1000);
-        return;
+    // Inicializar database vacío si no existe
+    if (!window.database) {
+        window.database = [];
     }
 
-    console.log(`✅ Database disponible: ${window.database.length} items`);
+    console.log(`✅ Database: ${window.database.length} items`);
 
     // Set initial language
     const savedLang = localStorage.getItem('atlascine_language') || 'es';
@@ -242,6 +239,21 @@ function initializeApp() {
 
     console.log('🎉 AtlasCine listo!');
 }
+
+// Escuchar evento de contenido cargado desde Firebase
+window.addEventListener('firebaseContentLoaded', (event) => {
+    console.log('🔄 Contenido de Firebase recibido, re-renderizando...');
+    window.database = event.detail.database || event.detail.content || [];
+
+    // Re-renderizar todo el contenido
+    renderHome();
+    renderMovies();
+    renderSeries();
+    renderAnime();
+    renderProducerRows();
+
+    console.log(`✅ Contenido actualizado: ${window.database.length} items`);
+});
 
 // Hacer la función disponible globalmente
 window.initializeApp = initializeApp;
