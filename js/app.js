@@ -752,8 +752,8 @@ function updateEpisodeSelector() {
 
 // Cargar episodio de serie
 function loadEpisode() {
-    // Abrir link de otieu.com primero
-    window.open('https://otieu.com/4/10266840', '_blank');
+    // Abrir Direct Link #2 (Monetag) para episodios
+    window.open('https://otieu.com/4/10362892', '_blank');
 
     const season = document.getElementById('seasonSelect')?.value || 1;
     const episode = document.getElementById('episodeSelect')?.value || 1;
@@ -950,8 +950,8 @@ function setupIframeErrorHandling() {
 
 // Change server manually
 function changeServer(serverIndex) {
-    // Abrir link de otieu.com primero
-    window.open('https://otieu.com/4/10266840', '_blank');
+    // Abrir Direct Link #2 (Monetag) para servidores
+    window.open('https://otieu.com/4/10362892', '_blank');
 
     // Update active button
     document.querySelectorAll('.server-btn').forEach((btn, idx) => {
