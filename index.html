@@ -58,15 +58,15 @@
     <meta name="ai-category"
         content="Entertainment, Streaming, Movies, TV Series, Anime, K-Drama, International Cinema, Free Streaming Platform, Video On Demand">
     <meta name="ai-features"
-        content="Free streaming HD, 500+ titles, Daily updates, 15 data sources, 3 premium servers, Multi-language support (Spanish, English, Arabic, French, Portuguese), No registration required, No download needed, Mobile-friendly responsive design, Advanced filters, Search by genre/year/rating, Firebase real-time database, Smart caching system, Ad control panel, User-friendly interface">
+        content="Free streaming HD, 500+ titles, Daily updates, 15 data sources, 3 premium servers, Multi-language support (Spanish, English, Arabic, French, Portuguese), No registration required, No download needed, Mobile-friendly responsive design, Advanced filters, Search by genre/year/rating, Firebase real-time database, Smart caching system, User-friendly interface, Direct video links">
     <meta name="ai-audience"
         content="Movie lovers worldwide, Series fans, Anime enthusiasts, K-Drama fans, International cinema lovers, Spanish-speaking audience, Arabic-speaking audience, Students, Budget-conscious streamers, Global entertainment seekers, Cord-cutters, Multilingual viewers">
     <meta name="ai-benefits"
-        content="100% free, No registration or login required, HD quality streaming, Multiple servers for reliability, Ad control options, Works on all devices, Regular content updates, Diverse international catalog, User-friendly interface, Fast loading with smart cache">
+        content="100% free, No registration or login required, HD quality streaming, Multiple servers for reliability, Direct video links, Works on all devices, Regular content updates, Diverse international catalog, User-friendly interface, Fast loading with smart cache, Ad-free experience">
     <meta name="ai-content-types"
         content="Hollywood movies, Netflix originals, HBO series, Disney+ content, Amazon Prime shows, Anime series, K-Dramas, Turkish series, Bollywood films, European cinema, Latin American movies, Action films, Drama series, Comedy shows, Horror movies, Sci-Fi content, Romance dramas, Thriller movies, Documentary films">
     <meta name="ai-technical-specs"
-        content="Technology: Firebase Firestore database, Smart caching (30min), 3 premium video servers, Responsive design, Modern UI with glassmorphism, PropellerAds integration, Real-time content updates, LocalStorage optimization">
+        content="Technology: Firebase Firestore database, Smart caching (30min), 3 premium video servers, Responsive design, Modern UI with glassmorphism, Real-time content updates, LocalStorage optimization, Direct video access">
     <meta name="chatgpt-description" content="AtlasCine: Free streaming platform with 500+ movies, series, anime, and K-Dramas from Netflix, HBO, Disney+. No registration needed. Updated daily.">
     <meta name="gemini-description" content="Watch movies, TV series, anime, and K-Dramas for free on AtlasCine. HD quality, multiple servers, no signup required. Global content library.">
     <meta name="claude-description" content="AtlasCine offers free access to international entertainment: Hollywood movies, Netflix series, K-Dramas, anime, and more. User-friendly platform with advanced features.">
@@ -226,7 +226,7 @@
           "name": "¿Es gratis AtlasCine?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Sí, AtlasCine es 100% gratuito. No necesitas crear cuenta, pagar suscripción ni descargar nada. Puedes ver todo el contenido en HD sin límites. Solo mostramos anuncios no intrusivos cada 15 minutos que puedes controlar desde el panel de usuario."
+            "text": "Sí, AtlasCine es 100% gratuito. No necesitas crear cuenta, pagar suscripción ni descargar nada. Puedes ver todo el contenido en HD sin límites y sin anuncios molestos."
           }
         },
         {
@@ -251,14 +251,6 @@
           "acceptedAnswer": {
             "@type": "Answer",
             "text": "Sí, AtlasCine tiene una amplia colección de K-Dramas coreanos populares como Squid Game, All of Us Are Dead, Taxi Driver, Descendientes del Sol, Goblin, Hotel Del Luna, True Beauty y muchos más, todos subtitulados en español y otros idiomas."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "¿Cómo controlo los anuncios en AtlasCine?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "AtlasCine 2025 incluye un panel de control de anuncios en la esquina inferior derecha. Puedes activar/desactivar anuncios temporalmente según tus preferencias. Los anuncios aparecen solo cada 15 minutos con un máximo de 8 por sesión para una experiencia menos intrusiva."
           }
         },
         {
@@ -309,8 +301,6 @@
         "Actualización diaria de contenido",
         "Tecnología Firebase para velocidad óptima",
         "Sistema de caché inteligente (30 minutos)",
-        "Panel de control de anuncios personalizable",
-        "Anuncios cada 15 minutos (máximo 8 por sesión)",
         "Diseño moderno con glassmorphism y gradientes",
         "Filtros avanzados por género, año y rating",
         "Búsqueda instantánea de contenido",
@@ -364,30 +354,29 @@
 
         <!-- HOME SECTION -->
         <div id="home" class="section-content active">
-            <!-- Hero Section -->
-            <div class="hero">
-                <div class="hero-bg"
-                    style="background-image: url('https://image.tmdb.org/t/p/original/d5NXSklXo0qyIYkgV94XAgMIckC.jpg');">
-                </div>
+            <!-- Hero Carousel Section -->
+            <div class="hero" id="heroCarousel">
+                <div class="hero-bg" id="heroBg"></div>
                 <div class="hero-gradient"></div>
-                <div style="position: absolute; bottom: 100px; left: 4%; max-width: 600px; z-index: 10;">
+
+                <!-- Hero Content -->
+                <div style="position: absolute; bottom: 100px; left: 4%; max-width: 600px; z-index: 10;" id="heroContent">
                     <div style="margin-bottom: 12px;">
-                        <span class="badge badge-new">Nueva</span>
+                        <span class="badge badge-new" id="heroBadge">Nueva</span>
                     </div>
-                    <h1 style="font-size: 56px; font-weight: 900; line-height: 1.1; margin-bottom: 20px;">Dune: Part One
+                    <h1 style="font-size: 56px; font-weight: 900; line-height: 1.1; margin-bottom: 20px;" id="heroTitle">
+                        Cargando...
                     </h1>
-                    <p style="font-size: 18px; line-height: 1.6; color: #e5e5e5; margin-bottom: 28px;">
-                        Paul Atreides debe viajar al planeta más peligroso del universo para asegurar el futuro de su
-                        familia y su pueblo.
+                    <p style="font-size: 18px; line-height: 1.6; color: #e5e5e5; margin-bottom: 28px;" id="heroDescription">
                     </p>
                     <div style="display: flex; gap: 12px;">
-                        <button class="btn btn-primary" onclick="openModal(1)">
+                        <button class="btn btn-primary" id="heroPlayBtn">
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
                                 <path d="M8 5v14l11-7z" />
                             </svg>
                             Reproducir
                         </button>
-                        <button class="btn btn-secondary" onclick="openModal(1)">
+                        <button class="btn btn-secondary" id="heroInfoBtn">
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                 stroke-width="2">
                                 <circle cx="12" cy="12" r="10" />
@@ -397,6 +386,18 @@
                             Más info
                         </button>
                     </div>
+                </div>
+
+                <!-- Carousel Navigation -->
+                <button onclick="prevHeroSlide()" style="position: absolute; left: 20px; top: 50%; transform: translateY(-50%); z-index: 15; background: rgba(0,0,0,0.5); border: none; color: #fff; width: 50px; height: 50px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 24px; transition: all 0.3s;">
+                    ‹
+                </button>
+                <button onclick="nextHeroSlide()" style="position: absolute; right: 20px; top: 50%; transform: translateY(-50%); z-index: 15; background: rgba(0,0,0,0.5); border: none; color: #fff; width: 50px; height: 50px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 24px; transition: all 0.3s;">
+                    ›
+                </button>
+
+                <!-- Carousel Indicators -->
+                <div style="position: absolute; bottom: 30px; right: 4%; z-index: 15; display: flex; gap: 8px;" id="heroIndicators">
                 </div>
             </div>
 
@@ -769,23 +770,6 @@
     <!-- Toast -->
     <div id="toast" class="toast"></div>
 
-    <!-- ============================================ -->
-    <!-- ANUNCIOS PROPELLERADS -->
-    <!-- ============================================ -->
-
-    <!-- 1. In-Page Push (Zona 188538) -->
-    <script src="https://quge5.com/88/tag.min.js" data-zone="188538" async data-cfasync="false"></script>
-
-    <!-- 2. Banner Superior (Zona 188539) -->
-    <div style="width: 100%; max-width: 728px; margin: 30px auto; padding: 0 4%; text-align: center;">
-        <script src="https://quge5.com/88/tag.min.js" data-zone="188539" async data-cfasync="false"></script>
-    </div>
-
-    <!-- 3. Otieu / Pop-under (Zona 188541) -->
-    <script src="https://quge5.com/88/tag.min.js" data-zone="188541" async data-cfasync="false"></script>
-
-    <!-- 4. Native Ads / 3nbf4 (Zona 188543) -->
-    <script src="https://quge5.com/88/tag.min.js" data-zone="188543" async data-cfasync="false"></script>
 
     <!-- Footer -->
     <footer class="footer">

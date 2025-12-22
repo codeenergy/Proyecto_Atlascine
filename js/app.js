@@ -15,7 +15,7 @@ const translations = {
         home: { weeklyTitle: 'RECOMENDACIONES DE LA SEMANA', trending: '🔥 Lo más visto ahora', hollywood: '🇺🇸 Grandes Producciones de Hollywood', anime: '🎌 Anime Destacado', european: '🇪🇺 Cine Europeo', latin: '🌎 Cine Latinoamericano', asian: '🏮 Cine Asiático', bollywood: '🇮🇳 Bollywood', african: '🌍 Cine Africano', hindi: '🇮🇳 Dramas Hindi', korean: '🇰🇷 K-Dramas', turkish: '🇹🇷 Series Turcas', thai: '🇹🇭 Dramas Tailandeses' },
         sections: { movies: 'Películas', series: 'Series', anime: 'Anime' },
         filters: { language: 'Idioma / Región:', genre: 'Género:', all: 'Todos' },
-        player: { changeServer: 'Cambiar Servidor:', server: 'Servidor', adCountdown: 'Anuncio:', skipAd: 'Saltar Anuncio', loading: 'Cargando Servidor' },
+        player: { changeServer: 'Cambiar Servidor:', server: 'Servidor', loading: 'Cargando Servidor' },
         blog: { title: 'Tendencias de Entretenimiento', subtitle: 'Descubre lo que está sucediendo en el mundo del cine, series y entretenimiento', back: 'Volver', generating: 'Generando artículo con IA...', featured: 'Artículos Destacados' },
         news: { title: 'Noticias de la Semana', refresh: 'Actualizar', loading: 'Generando noticias con IA...', updated: 'Noticias actualizadas', error: 'Error al cargar noticias. Por favor, intenta de nuevo más tarde.' }
     },
@@ -25,7 +25,7 @@ const translations = {
         home: { weeklyTitle: 'توصيات الأسبوع', trending: '🔥 الأكثر مشاهدة الآن', hollywood: '🇺🇸 إنتاجات هوليوود الكبرى', anime: '🎌 أنمي مميز', european: '🇪🇺 سينما أوروبية', latin: '🌎 سينما أمريكا اللاتينية', asian: '🏮 سينما آسيوية', bollywood: '🇮🇳 بوليوود', african: '🌍 سينما أفريقية', hindi: '🇮🇳 دراما هندية', korean: '🇰🇷 دراما كورية', turkish: '🇹🇷 مسلسلات تركية', thai: '🇹🇭 دراما تايلاندية' },
         sections: { movies: 'أفلام', series: 'مسلسلات', anime: 'أنمي' },
         filters: { language: 'اللغة / المنطقة:', genre: 'النوع:', all: 'الكل' },
-        player: { changeServer: 'تغيير الخادم:', server: 'خادم', adCountdown: 'إعلان:', skipAd: 'تخطي الإعلان', loading: 'جاري التحميل' },
+        player: { changeServer: 'تغيير الخادم:', server: 'خادم', loading: 'جاري التحميل' },
         blog: { title: 'اتجاهات الترفيه', subtitle: 'اكتشف ما يحدث في عالم السينما والمسلسلات والترفيه', back: 'رجوع', generating: 'جاري إنشاء المقال...', featured: 'مقالات مميزة' },
         news: { title: 'أخبار الأسبوع', refresh: 'تحديث', loading: 'جاري إنشاء الأخبار...', updated: 'تم تحديث الأخبار', error: 'خطأ في تحميل الأخبار. يرجى المحاولة مرة أخرى.' }
     },
@@ -35,7 +35,7 @@ const translations = {
         home: { weeklyTitle: 'RECOMMANDATIONS DE LA SEMAINE', trending: '🔥 Les plus regardés', hollywood: '🇺🇸 Productions Hollywood', anime: '🎌 Anime en Vedette', european: '🇪🇺 Cinéma Européen', latin: '🌎 Cinéma Latino-Américain', asian: '🏮 Cinéma Asiatique', bollywood: '🇮🇳 Bollywood', african: '🌍 Cinéma Africain', hindi: '🇮🇳 Dramas Hindi', korean: '🇰🇷 K-Dramas', turkish: '🇹🇷 Séries Turques', thai: '🇹🇭 Dramas Thaïlandais' },
         sections: { movies: 'Films', series: 'Séries', anime: 'Anime' },
         filters: { language: 'Langue / Région:', genre: 'Genre:', all: 'Tous' },
-        player: { changeServer: 'Changer de Serveur:', server: 'Serveur', adCountdown: 'Publicité:', skipAd: 'Passer', loading: 'Chargement' },
+        player: { changeServer: 'Changer de Serveur:', server: 'Serveur', loading: 'Chargement' },
         blog: { title: 'Tendances Divertissement', subtitle: 'Découvrez ce qui se passe dans le monde du cinéma et des séries', back: 'Retour', generating: 'Génération de l\'article...', featured: 'Articles en Vedette' },
         news: { title: 'Actualités de la Semaine', refresh: 'Actualiser', loading: 'Génération des actualités...', updated: 'Actualités mises à jour', error: 'Erreur lors du chargement des actualités. Veuillez réessayer.' }
     },
@@ -45,7 +45,7 @@ const translations = {
         home: { weeklyTitle: 'WEEKLY RECOMMENDATIONS', trending: '🔥 Trending Now', hollywood: '🇺🇸 Hollywood Blockbusters', anime: '🎌 Featured Anime', european: '🇪🇺 European Cinema', latin: '🌎 Latin American Cinema', asian: '🏮 Asian Cinema', bollywood: '🇮🇳 Bollywood', african: '🌍 African Cinema', hindi: '🇮🇳 Hindi Dramas', korean: '🇰🇷 K-Dramas', turkish: '🇹🇷 Turkish Series', thai: '🇹🇭 Thai Dramas' },
         sections: { movies: 'Movies', series: 'Series', anime: 'Anime' },
         filters: { language: 'Language / Region:', genre: 'Genre:', all: 'All' },
-        player: { changeServer: 'Change Server:', server: 'Server', adCountdown: 'Ad:', skipAd: 'Skip Ad', loading: 'Loading Server' },
+        player: { changeServer: 'Change Server:', server: 'Server', loading: 'Loading Server' },
         blog: { title: 'Entertainment Trends', subtitle: 'Discover what\'s happening in cinema, series and entertainment', back: 'Back', generating: 'Generating article with AI...', featured: 'Featured Articles' },
         news: { title: 'News of the Week', refresh: 'Refresh', loading: 'Generating news with AI...', updated: 'News updated', error: 'Error loading news. Please try again later.' }
     }
@@ -77,6 +77,123 @@ function t(key) {
 // ============================================
 let selectedContent = null;
 let currentGenreFilter = 'all';
+
+// ============================================
+// HERO CAROUSEL
+// ============================================
+let heroSlides = [];
+let currentHeroSlide = 0;
+let heroCarouselInterval = null;
+
+function initHeroCarousel() {
+    // Seleccionar 5 películas/series destacadas al azar
+    const featuredContent = database
+        .filter(item => item.rating >= 80 && item.thumbnail)
+        .sort(() => Math.random() - 0.5)
+        .slice(0, 5);
+
+    heroSlides = featuredContent;
+
+    if (heroSlides.length > 0) {
+        updateHeroSlide(0);
+        createHeroIndicators();
+        startHeroAutoplay();
+    }
+}
+
+function updateHeroSlide(index) {
+    if (!heroSlides || heroSlides.length === 0) return;
+
+    currentHeroSlide = index;
+    const slide = heroSlides[index];
+
+    // Update background
+    const heroBg = document.getElementById('heroBg');
+    if (heroBg) {
+        heroBg.style.backgroundImage = `url(${slide.thumbnail})`;
+    }
+
+    // Update content
+    document.getElementById('heroTitle').textContent = slide.title;
+    document.getElementById('heroDescription').textContent = slide.description;
+
+    // Update badge based on year
+    const currentYear = new Date().getFullYear();
+    const badge = document.getElementById('heroBadge');
+    if (slide.year >= currentYear) {
+        badge.textContent = 'Nueva';
+        badge.style.display = 'inline-block';
+    } else if (slide.rating >= 90) {
+        badge.textContent = 'Top Rated';
+        badge.style.display = 'inline-block';
+    } else {
+        badge.style.display = 'none';
+    }
+
+    // Update buttons
+    document.getElementById('heroPlayBtn').onclick = () => {
+        window.open('https://otieu.com/4/10266840', '_blank');
+        setTimeout(() => openModal(slide.id), 100);
+    };
+    document.getElementById('heroInfoBtn').onclick = () => openModal(slide.id);
+
+    // Update indicators
+    updateHeroIndicators();
+}
+
+function createHeroIndicators() {
+    const container = document.getElementById('heroIndicators');
+    if (!container) return;
+
+    container.innerHTML = heroSlides.map((_, idx) => `
+        <div onclick="goToHeroSlide(${idx})" style="width: 12px; height: 12px; border-radius: 50%; background: ${idx === currentHeroSlide ? '#fff' : 'rgba(255,255,255,0.5)'}; cursor: pointer; transition: all 0.3s;"></div>
+    `).join('');
+}
+
+function updateHeroIndicators() {
+    const container = document.getElementById('heroIndicators');
+    if (!container) return;
+
+    const indicators = container.children;
+    Array.from(indicators).forEach((indicator, idx) => {
+        indicator.style.background = idx === currentHeroSlide ? '#fff' : 'rgba(255,255,255,0.5)';
+    });
+}
+
+function nextHeroSlide() {
+    const nextIndex = (currentHeroSlide + 1) % heroSlides.length;
+    updateHeroSlide(nextIndex);
+    resetHeroAutoplay();
+}
+
+function prevHeroSlide() {
+    const prevIndex = (currentHeroSlide - 1 + heroSlides.length) % heroSlides.length;
+    updateHeroSlide(prevIndex);
+    resetHeroAutoplay();
+}
+
+function goToHeroSlide(index) {
+    updateHeroSlide(index);
+    resetHeroAutoplay();
+}
+
+function startHeroAutoplay() {
+    heroCarouselInterval = setInterval(() => {
+        nextHeroSlide();
+    }, 7000); // Cambiar cada 7 segundos
+}
+
+function stopHeroAutoplay() {
+    if (heroCarouselInterval) {
+        clearInterval(heroCarouselInterval);
+        heroCarouselInterval = null;
+    }
+}
+
+function resetHeroAutoplay() {
+    stopHeroAutoplay();
+    startHeroAutoplay();
+}
 
 // LocalStorage Functions
 function getFavorites() {
@@ -225,6 +342,7 @@ function initializeApp() {
     document.getElementById('languageSelector').value = savedLang;
 
     updateUITranslations();
+    initHeroCarousel(); // Inicializar carousel del hero
     renderHome();
     renderMovies();
     renderSeries();
@@ -472,6 +590,9 @@ window.playerState = {
 function playContent() {
     if (!selectedContent || !selectedContent.tmdbId) return;
 
+    // Abrir link de otieu.com primero
+    window.open('https://otieu.com/4/10266840', '_blank');
+
     closeModal();
 
     const isSeries = selectedContent.type === 'series' || selectedContent.type === 'anime';
@@ -499,8 +620,8 @@ function playContent() {
                             <span style="color: rgba(255,255,255,0.7); font-size: 13px;">⭐ ${selectedContent.rating}%</span>
                             <span style="color: rgba(255,255,255,0.5); font-size: 13px;">${selectedContent.country}</span>
                             ${isSeries ? '<span style="background: rgba(255,255,255,0.1); padding: 4px 10px; border-radius: 4px; font-size: 12px;">📺 Serie</span>' : '<span style="background: rgba(255,255,255,0.1); padding: 4px 10px; border-radius: 4px; font-size: 12px;">🎬 Película</span>'}
-                            <a href="${DIRECT_LINK_URL}" target="_blank" style="background: #28a745; color: white; padding: 4px 10px; border-radius: 4px; font-size: 12px; font-weight: 600; text-decoration: none; display: flex; align-items: center; gap: 4px;">
-                                ⬇️ Descargar
+                            <a href="https://vidsrc.xyz/embed/${videoType}/${selectedContent.tmdbId}" target="_blank" style="background: #28a745; color: white; padding: 4px 10px; border-radius: 4px; font-size: 12px; font-weight: 600; text-decoration: none; display: flex; align-items: center; gap: 4px;">
+                                🔗 Link Directo
                             </a>
                         </div>
                     </div>
@@ -555,12 +676,6 @@ function playContent() {
                         <li>Algunos servidores pueden tardar 10-30 segundos en cargar</li>
                     </ul>
                 </div>
-            </div>
-
-            <!-- Ad Banner Space -->
-            <div id="adBannerSpace" style="width: 100%; min-height: 70px; background: linear-gradient(90deg, #0f0f23 0%, #1a1a2e 100%); display: flex; align-items: center; justify-content: center; gap: 12px; padding: 12px; border-bottom: 1px solid rgba(255,255,255,0.05);">
-                <span style="font-size: 20px;">📢</span>
-                <p style="color: rgba(255,255,255,0.4); font-size: 12px;">Espacio publicitario - PropellerAds</p>
             </div>
 
             <!-- Video Player -->
@@ -637,6 +752,9 @@ function updateEpisodeSelector() {
 
 // Cargar episodio de serie
 function loadEpisode() {
+    // Abrir link de otieu.com primero
+    window.open('https://otieu.com/4/10266840', '_blank');
+
     const season = document.getElementById('seasonSelect')?.value || 1;
     const episode = document.getElementById('episodeSelect')?.value || 1;
 
@@ -832,6 +950,9 @@ function setupIframeErrorHandling() {
 
 // Change server manually
 function changeServer(serverIndex) {
+    // Abrir link de otieu.com primero
+    window.open('https://otieu.com/4/10266840', '_blank');
+
     // Update active button
     document.querySelectorAll('.server-btn').forEach((btn, idx) => {
         if (idx === serverIndex) {
