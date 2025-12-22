@@ -5,7 +5,9 @@
  */
 
 const TMDB_SYNC_CONFIG = {
-    apiKey: 'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI4NGQzMjFmMjRiNmYyYjMyODU1YzIwOWI5MjQzNDZmNyIsIm5iZiI6MTczNzkyNDMwNC44OTEsInN1YiI6IjY3OTc1ZWUwODExNGMwOGZmZDk4YWY4NyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.y-2e-jfIXsrzmAi1gTujzgYvjMNZ7FfDCLKoYGKF08s',
+    // Usando API Key v3 directamente (más estable)
+    apiKey: '84d321f24b6f2b32855c209b924346f7',
+    useV3Auth: true, // Usar autenticación v3 en lugar de Bearer token
     baseUrl: 'https://api.themoviedb.org/3',
     imageBase: 'https://image.tmdb.org/t/p',
     collection: 'movies_series' // Nombre de la colección en Firebase
@@ -46,20 +48,22 @@ const GENRE_MAP = {
 };
 
 /**
- * Headers para peticiones TMDB
- */
-const headers = {
-    'Authorization': `Bearer ${TMDB_SYNC_CONFIG.apiKey}`,
-    'Content-Type': 'application/json'
-};
-
-/**
- * Fetch desde TMDB
+ * Fetch desde TMDB con autenticación v3
  */
 async function tmdbFetch(endpoint) {
     try {
-        const response = await fetch(`${TMDB_SYNC_CONFIG.baseUrl}${endpoint}`, { headers });
-        if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+        // Agregar api_key como parámetro de query para v3
+        const separator = endpoint.includes('?') ? '&' : '?';
+        const url = `${TMDB_SYNC_CONFIG.baseUrl}${endpoint}${separator}api_key=${TMDB_SYNC_CONFIG.apiKey}`;
+
+        const response = await fetch(url, {
+            headers: { 'Content-Type': 'application/json' }
+        });
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
         return await response.json();
     } catch (error) {
         console.error(`Error fetching ${endpoint}:`, error);

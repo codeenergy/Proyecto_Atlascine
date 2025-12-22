@@ -15,7 +15,22 @@ const translations = {
         home: { weeklyTitle: 'RECOMENDACIONES DE LA SEMANA', trending: '🔥 Lo más visto ahora', hollywood: '🇺🇸 Grandes Producciones de Hollywood', anime: '🎌 Anime Destacado', european: '🇪🇺 Cine Europeo', latin: '🌎 Cine Latinoamericano', asian: '🏮 Cine Asiático', bollywood: '🇮🇳 Bollywood', african: '🌍 Cine Africano', hindi: '🇮🇳 Dramas Hindi', korean: '🇰🇷 K-Dramas', turkish: '🇹🇷 Series Turcas', thai: '🇹🇭 Dramas Tailandeses' },
         sections: { movies: 'Películas', series: 'Series', anime: 'Anime' },
         filters: { language: 'Idioma / Región:', genre: 'Género:', all: 'Todos' },
-        player: { changeServer: 'Cambiar Servidor:', server: 'Servidor', loading: 'Cargando Servidor' },
+        player: {
+            changeServer: 'Cambiar Servidor:',
+            server: 'Servidor',
+            loading: 'Cargando Servidor',
+            season: 'Temporada',
+            episode: 'Episodio',
+            play: 'Reproducir',
+            selectServer: 'Selecciona servidor:',
+            troubleshoot: 'Si el video no carga:',
+            tip1: 'Prueba cambiar de servidor (botones arriba)',
+            tip2: 'Abre la consola del navegador (F12) y revisa los mensajes',
+            tip3: 'Verifica que tu navegador permita iframes de sitios externos',
+            tip4: 'Algunos servidores pueden tardar 10-30 segundos en cargar',
+            prevEpisode: '← Episodio Anterior',
+            nextEpisode: 'Siguiente Episodio →'
+        },
         blog: { title: 'Tendencias de Entretenimiento', subtitle: 'Descubre lo que está sucediendo en el mundo del cine, series y entretenimiento', back: 'Volver', generating: 'Generando artículo con IA...', featured: 'Artículos Destacados' },
         news: { title: 'Noticias de la Semana', refresh: 'Actualizar', loading: 'Generando noticias con IA...', updated: 'Noticias actualizadas', error: 'Error al cargar noticias. Por favor, intenta de nuevo más tarde.' }
     },
@@ -25,7 +40,22 @@ const translations = {
         home: { weeklyTitle: 'توصيات الأسبوع', trending: '🔥 الأكثر مشاهدة الآن', hollywood: '🇺🇸 إنتاجات هوليوود الكبرى', anime: '🎌 أنمي مميز', european: '🇪🇺 سينما أوروبية', latin: '🌎 سينما أمريكا اللاتينية', asian: '🏮 سينما آسيوية', bollywood: '🇮🇳 بوليوود', african: '🌍 سينما أفريقية', hindi: '🇮🇳 دراما هندية', korean: '🇰🇷 دراما كورية', turkish: '🇹🇷 مسلسلات تركية', thai: '🇹🇭 دراما تايلاندية' },
         sections: { movies: 'أفلام', series: 'مسلسلات', anime: 'أنمي' },
         filters: { language: 'اللغة / المنطقة:', genre: 'النوع:', all: 'الكل' },
-        player: { changeServer: 'تغيير الخادم:', server: 'خادم', loading: 'جاري التحميل' },
+        player: {
+            changeServer: 'تغيير الخادم:',
+            server: 'خادم',
+            loading: 'جاري التحميل',
+            season: 'موسم',
+            episode: 'حلقة',
+            play: 'تشغيل',
+            selectServer: 'اختر الخادم:',
+            troubleshoot: 'إذا لم يتم تحميل الفيديو:',
+            tip1: 'جرب تغيير الخادم (الأزرار أعلاه)',
+            tip2: 'افتح وحدة تحكم المتصفح (F12) وتحقق من الرسائل',
+            tip3: 'تحقق من أن متصفحك يسمح بإطارات iframe من مواقع خارجية',
+            tip4: 'قد تستغرق بعض الخوادم 10-30 ثانية للتحميل',
+            prevEpisode: '→ الحلقة السابقة',
+            nextEpisode: 'الحلقة التالية ←'
+        },
         blog: { title: 'اتجاهات الترفيه', subtitle: 'اكتشف ما يحدث في عالم السينما والمسلسلات والترفيه', back: 'رجوع', generating: 'جاري إنشاء المقال...', featured: 'مقالات مميزة' },
         news: { title: 'أخبار الأسبوع', refresh: 'تحديث', loading: 'جاري إنشاء الأخبار...', updated: 'تم تحديث الأخبار', error: 'خطأ في تحميل الأخبار. يرجى المحاولة مرة أخرى.' }
     },
@@ -35,7 +65,22 @@ const translations = {
         home: { weeklyTitle: 'RECOMMANDATIONS DE LA SEMAINE', trending: '🔥 Les plus regardés', hollywood: '🇺🇸 Productions Hollywood', anime: '🎌 Anime en Vedette', european: '🇪🇺 Cinéma Européen', latin: '🌎 Cinéma Latino-Américain', asian: '🏮 Cinéma Asiatique', bollywood: '🇮🇳 Bollywood', african: '🌍 Cinéma Africain', hindi: '🇮🇳 Dramas Hindi', korean: '🇰🇷 K-Dramas', turkish: '🇹🇷 Séries Turques', thai: '🇹🇭 Dramas Thaïlandais' },
         sections: { movies: 'Films', series: 'Séries', anime: 'Anime' },
         filters: { language: 'Langue / Région:', genre: 'Genre:', all: 'Tous' },
-        player: { changeServer: 'Changer de Serveur:', server: 'Serveur', loading: 'Chargement' },
+        player: {
+            changeServer: 'Changer de Serveur:',
+            server: 'Serveur',
+            loading: 'Chargement',
+            season: 'Saison',
+            episode: 'Épisode',
+            play: 'Lire',
+            selectServer: 'Sélectionnez le serveur:',
+            troubleshoot: 'Si la vidéo ne se charge pas:',
+            tip1: 'Essayez de changer de serveur (boutons ci-dessus)',
+            tip2: 'Ouvrez la console du navigateur (F12) et vérifiez les messages',
+            tip3: 'Vérifiez que votre navigateur autorise les iframes de sites externes',
+            tip4: 'Certains serveurs peuvent prendre 10 à 30 secondes à charger',
+            prevEpisode: '← Épisode Précédent',
+            nextEpisode: 'Épisode Suivant →'
+        },
         blog: { title: 'Tendances Divertissement', subtitle: 'Découvrez ce qui se passe dans le monde du cinéma et des séries', back: 'Retour', generating: 'Génération de l\'article...', featured: 'Articles en Vedette' },
         news: { title: 'Actualités de la Semaine', refresh: 'Actualiser', loading: 'Génération des actualités...', updated: 'Actualités mises à jour', error: 'Erreur lors du chargement des actualités. Veuillez réessayer.' }
     },
@@ -45,7 +90,22 @@ const translations = {
         home: { weeklyTitle: 'WEEKLY RECOMMENDATIONS', trending: '🔥 Trending Now', hollywood: '🇺🇸 Hollywood Blockbusters', anime: '🎌 Featured Anime', european: '🇪🇺 European Cinema', latin: '🌎 Latin American Cinema', asian: '🏮 Asian Cinema', bollywood: '🇮🇳 Bollywood', african: '🌍 African Cinema', hindi: '🇮🇳 Hindi Dramas', korean: '🇰🇷 K-Dramas', turkish: '🇹🇷 Turkish Series', thai: '🇹🇭 Thai Dramas' },
         sections: { movies: 'Movies', series: 'Series', anime: 'Anime' },
         filters: { language: 'Language / Region:', genre: 'Genre:', all: 'All' },
-        player: { changeServer: 'Change Server:', server: 'Server', loading: 'Loading Server' },
+        player: {
+            changeServer: 'Change Server:',
+            server: 'Server',
+            loading: 'Loading Server',
+            season: 'Season',
+            episode: 'Episode',
+            play: 'Play',
+            selectServer: 'Select server:',
+            troubleshoot: 'If video doesn\'t load:',
+            tip1: 'Try changing server (buttons above)',
+            tip2: 'Open browser console (F12) and check messages',
+            tip3: 'Verify that your browser allows iframes from external sites',
+            tip4: 'Some servers may take 10-30 seconds to load',
+            prevEpisode: '← Previous Episode',
+            nextEpisode: 'Next Episode →'
+        },
         blog: { title: 'Entertainment Trends', subtitle: 'Discover what\'s happening in cinema, series and entertainment', back: 'Back', generating: 'Generating article with AI...', featured: 'Featured Articles' },
         news: { title: 'News of the Week', refresh: 'Refresh', loading: 'Generating news with AI...', updated: 'News updated', error: 'Error loading news. Please try again later.' }
     }
@@ -633,19 +693,19 @@ function playContent() {
             <div style="padding: 15px 20px; background: rgba(0,0,0,0.3); border-bottom: 1px solid rgba(255,255,255,0.1);">
                 <div style="display: flex; gap: 15px; align-items: center; flex-wrap: wrap;">
                     <div style="display: flex; align-items: center; gap: 8px;">
-                        <label style="color: rgba(255,255,255,0.7); font-size: 14px;">📅 Temporada:</label>
+                        <label style="color: rgba(255,255,255,0.7); font-size: 14px;">📅 ${t('player.season')}:</label>
                         <select id="seasonSelect" onchange="updateEpisodeSelector()" style="background: #1a1a1a; border: 1px solid rgba(255,255,255,0.2); color: #fff; padding: 8px 15px; border-radius: 6px; font-size: 14px; cursor: pointer;">
                             ${generateSeasonOptions(10)}
                         </select>
                     </div>
                     <div style="display: flex; align-items: center; gap: 8px;">
-                        <label style="color: rgba(255,255,255,0.7); font-size: 14px;">🎬 Episodio:</label>
+                        <label style="color: rgba(255,255,255,0.7); font-size: 14px;">🎬 ${t('player.episode')}:</label>
                         <select id="episodeSelect" onchange="loadEpisode()" style="background: #1a1a1a; border: 1px solid rgba(255,255,255,0.2); color: #fff; padding: 8px 15px; border-radius: 6px; font-size: 14px; cursor: pointer;">
                             ${generateEpisodeOptions(24)}
                         </select>
                     </div>
                     <button onclick="loadEpisode()" style="background: #e50914; border: none; color: #fff; padding: 8px 20px; border-radius: 6px; font-size: 14px; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 6px;">
-                        ▶ Reproducir
+                        ▶ ${t('player.play')}
                     </button>
                 </div>
             </div>
@@ -653,7 +713,7 @@ function playContent() {
 
             <!-- Selector de Servidores -->
             <div style="padding: 15px 20px; background: rgba(0,0,0,0.2);" id="serverSelection">
-                <p style="margin-bottom: 12px; font-size: 13px; color: rgba(255,255,255,0.6);">🖥️ Selecciona servidor:</p>
+                <p style="margin-bottom: 12px; font-size: 13px; color: rgba(255,255,255,0.6);">🖥️ ${t('player.selectServer')}</p>
                 <div style="display: flex; gap: 10px; flex-wrap: wrap; justify-content: center;">
                     <button onclick="changeServer(0)" class="server-btn active" data-server="0">
                         <span style="font-size: 16px;">🌐</span> VidSrc
@@ -667,13 +727,13 @@ function playContent() {
                 </div>
                 <div style="margin-top: 12px; padding: 10px; background: rgba(229,9,20,0.1); border-left: 3px solid #e50914; border-radius: 4px;">
                     <p style="font-size: 11px; color: rgba(255,255,255,0.7); margin-bottom: 5px;">
-                        💡 <strong>Si el video no carga:</strong>
+                        💡 <strong>${t('player.troubleshoot')}</strong>
                     </p>
                     <ul style="font-size: 10px; color: rgba(255,255,255,0.6); margin-left: 15px; line-height: 1.6;">
-                        <li>Prueba cambiar de servidor (botones arriba)</li>
-                        <li>Abre la consola del navegador (F12) y revisa los mensajes</li>
-                        <li>Verifica que tu navegador permita iframes de sitios externos</li>
-                        <li>Algunos servidores pueden tardar 10-30 segundos en cargar</li>
+                        <li>${t('player.tip1')}</li>
+                        <li>${t('player.tip2')}</li>
+                        <li>${t('player.tip3')}</li>
+                        <li>${t('player.tip4')}</li>
                     </ul>
                 </div>
             </div>
@@ -697,11 +757,11 @@ function playContent() {
             ${isSeries ? `
             <div style="padding: 15px 20px; background: rgba(0,0,0,0.3); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
                 <button onclick="prevEpisode()" style="background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: #fff; padding: 10px 20px; border-radius: 6px; cursor: pointer; font-size: 14px;">
-                    ⬅️ Episodio Anterior
+                    ${t('player.prevEpisode')}
                 </button>
                 <span id="currentEpisodeLabel" style="color: rgba(255,255,255,0.7); font-size: 14px;">T1 E1</span>
                 <button onclick="nextEpisode()" style="background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: #fff; padding: 10px 20px; border-radius: 6px; cursor: pointer; font-size: 14px;">
-                    Siguiente Episodio ➡️
+                    ${t('player.nextEpisode')}
                 </button>
             </div>
             ` : ''}
