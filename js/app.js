@@ -119,18 +119,24 @@ function t(key) {
 }
 
 // ============================================
-// Database is loaded from separate source files
+// Database cargada 100% desde Firebase
 // ============================================
-// The database variable is populated by:
-// - js/databases/hdtoday.js (general content)
-// - js/databases/lodynet.js (Hindi & Turkish)
-// - js/databases/aradramatv.js (Asian dramas)
-// - js/databases/pelisflix.js (streaming originals)
-// - js/databases/index.js (combines all with error handling)
+// Contenido obtenido desde TMDB API (Legal) → Firebase
+// Más de 800+ películas y series actualizadas automáticamente
 //
-// If one source fails, others continue working independently
-
-// Database will be available as global variable from databases/index.js
+// Categorías incluidas:
+// 🎬 Películas: Trending, Popular, Top Rated
+// 📺 Series: Trending, Popular
+// 🎌 Anime Japonés
+// 🇰🇷 K-Dramas Coreanos
+// 🇨🇳 Dramas Chinos
+// 🇹🇭 Dramas Tailandeses
+// 🇹🇷 Series Turcas
+// 🇮🇳 Bollywood (India)
+// 🌎 Cine Latinoamericano
+// 🇪🇺 Cine Europeo
+//
+// Auto-sync activado: Actualización automática si Firebase está vacío
 
 // ============================================
 // Application State

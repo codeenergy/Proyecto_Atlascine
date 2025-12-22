@@ -338,22 +338,210 @@ async function syncKDramas(pages = 3) {
 }
 
 /**
+ * SYNC: Series Turcas
+ */
+async function syncTurkishSeries(pages = 2) {
+    console.log('📥 Sincronizando series turcas...');
+    let total = 0;
+
+    for (let page = 1; page <= pages; page++) {
+        const data = await tmdbFetch(`/discover/tv?with_origin_country=TR&page=${page}&language=es-ES&sort_by=popularity.desc`);
+        if (!data || !data.results) continue;
+
+        for (const item of data.results) {
+            const firebaseItem = convertToFirebaseFormat(item, 'tv', 'tmdb-turkish');
+            firebaseItem.language = 'Turco';
+            firebaseItem.region = 'Turquía';
+            const saved = await saveToFirebase(firebaseItem);
+            if (saved) total++;
+        }
+        await new Promise(resolve => setTimeout(resolve, 500));
+    }
+
+    console.log(`✅ ${total} series turcas guardadas`);
+    return total;
+}
+
+/**
+ * SYNC: Dramas Tailandeses
+ */
+async function syncThaiDramas(pages = 2) {
+    console.log('📥 Sincronizando dramas tailandeses...');
+    let total = 0;
+
+    for (let page = 1; page <= pages; page++) {
+        const data = await tmdbFetch(`/discover/tv?with_origin_country=TH&page=${page}&language=es-ES&sort_by=popularity.desc`);
+        if (!data || !data.results) continue;
+
+        for (const item of data.results) {
+            const firebaseItem = convertToFirebaseFormat(item, 'tv', 'tmdb-thai');
+            firebaseItem.language = 'Tailandés';
+            firebaseItem.region = 'Tailandia';
+            const saved = await saveToFirebase(firebaseItem);
+            if (saved) total++;
+        }
+        await new Promise(resolve => setTimeout(resolve, 500));
+    }
+
+    console.log(`✅ ${total} dramas tailandeses guardados`);
+    return total;
+}
+
+/**
+ * SYNC: Bollywood (Películas y Series de India)
+ */
+async function syncBollywood(pages = 2) {
+    console.log('📥 Sincronizando Bollywood...');
+    let total = 0;
+
+    // Películas de India
+    for (let page = 1; page <= pages; page++) {
+        const data = await tmdbFetch(`/discover/movie?with_origin_country=IN&page=${page}&language=es-ES&sort_by=popularity.desc`);
+        if (!data || !data.results) continue;
+
+        for (const item of data.results) {
+            const firebaseItem = convertToFirebaseFormat(item, 'movie', 'tmdb-bollywood');
+            firebaseItem.language = 'Hindi';
+            firebaseItem.region = 'India';
+            const saved = await saveToFirebase(firebaseItem);
+            if (saved) total++;
+        }
+        await new Promise(resolve => setTimeout(resolve, 500));
+    }
+
+    console.log(`✅ ${total} contenido Bollywood guardado`);
+    return total;
+}
+
+/**
+ * SYNC: Cine Latinoamericano
+ */
+async function syncLatinMovies(pages = 2) {
+    console.log('📥 Sincronizando cine latinoamericano...');
+    let total = 0;
+
+    const countries = ['MX', 'AR', 'BR', 'CO', 'CL'];
+
+    for (const country of countries) {
+        const data = await tmdbFetch(`/discover/movie?with_origin_country=${country}&page=1&language=es-ES&sort_by=popularity.desc`);
+        if (!data || !data.results) continue;
+
+        for (const item of data.results.slice(0, 10)) {
+            const firebaseItem = convertToFirebaseFormat(item, 'movie', 'tmdb-latin');
+            firebaseItem.region = 'América Latina';
+            const saved = await saveToFirebase(firebaseItem);
+            if (saved) total++;
+        }
+        await new Promise(resolve => setTimeout(resolve, 500));
+    }
+
+    console.log(`✅ ${total} películas latinoamericanas guardadas`);
+    return total;
+}
+
+/**
+ * SYNC: Cine Europeo
+ */
+async function syncEuropeanMovies(pages = 2) {
+    console.log('📥 Sincronizando cine europeo...');
+    let total = 0;
+
+    const countries = ['FR', 'IT', 'ES', 'DE', 'GB'];
+
+    for (const country of countries) {
+        const data = await tmdbFetch(`/discover/movie?with_origin_country=${country}&page=1&language=es-ES&sort_by=popularity.desc`);
+        if (!data || !data.results) continue;
+
+        for (const item of data.results.slice(0, 10)) {
+            const firebaseItem = convertToFirebaseFormat(item, 'movie', 'tmdb-european');
+            firebaseItem.region = 'Europa';
+            const saved = await saveToFirebase(firebaseItem);
+            if (saved) total++;
+        }
+        await new Promise(resolve => setTimeout(resolve, 500));
+    }
+
+    console.log(`✅ ${total} películas europeas guardadas`);
+    return total;
+}
+
+/**
+ * SYNC: Dramas Chinos
+ */
+async function syncChineseDramas(pages = 2) {
+    console.log('📥 Sincronizando dramas chinos...');
+    let total = 0;
+
+    for (let page = 1; page <= pages; page++) {
+        const data = await tmdbFetch(`/discover/tv?with_origin_country=CN&page=${page}&language=es-ES&sort_by=popularity.desc`);
+        if (!data || !data.results) continue;
+
+        for (const item of data.results) {
+            const firebaseItem = convertToFirebaseFormat(item, 'tv', 'tmdb-chinese');
+            firebaseItem.language = 'Chino';
+            firebaseItem.region = 'China';
+            const saved = await saveToFirebase(firebaseItem);
+            if (saved) total++;
+        }
+        await new Promise(resolve => setTimeout(resolve, 500));
+    }
+
+    console.log(`✅ ${total} dramas chinos guardados`);
+    return total;
+}
+
+/**
+ * SYNC: Top Rated Movies
+ */
+async function syncTopRatedMovies(pages = 2) {
+    console.log('📥 Sincronizando películas top rated...');
+    let total = 0;
+
+    for (let page = 1; page <= pages; page++) {
+        const data = await tmdbFetch(`/movie/top_rated?page=${page}&language=es-ES`);
+        if (!data || !data.results) continue;
+
+        for (const item of data.results) {
+            const firebaseItem = convertToFirebaseFormat(item, 'movie', 'tmdb-toprated');
+            const saved = await saveToFirebase(firebaseItem);
+            if (saved) total++;
+        }
+        await new Promise(resolve => setTimeout(resolve, 500));
+    }
+
+    console.log(`✅ ${total} películas top rated guardadas`);
+    return total;
+}
+
+/**
  * SYNC COMPLETO - Ejecutar todo
  */
 async function syncAllContent() {
-    console.log('%c🔄 TMDB → Firebase Sync', 'font-size: 16px; font-weight: bold; color: #01b4e4;');
-    console.log('%c⏳ Iniciando sincronización completa...', 'color: #999;');
+    console.log('%c🔄 TMDB → Firebase Sync AMPLIADO', 'font-size: 16px; font-weight: bold; color: #01b4e4;');
+    console.log('%c⏳ Iniciando sincronización completa con TODAS las categorías...', 'color: #999;');
 
     const startTime = Date.now();
 
     try {
         const results = await Promise.all([
+            // Tendencias y Populares
             syncTrendingMovies(3),
             syncPopularMovies(3),
             syncTrendingSeries(3),
             syncPopularSeries(3),
+            syncTopRatedMovies(2),
+
+            // Anime y Dramas Asiáticos
             syncAnime(3),
-            syncKDramas(3)
+            syncKDramas(3),
+            syncChineseDramas(2),
+            syncThaiDramas(2),
+
+            // Contenido por Región
+            syncBollywood(2),
+            syncTurkishSeries(2),
+            syncLatinMovies(2),
+            syncEuropeanMovies(2)
         ]);
 
         const total = results.reduce((sum, val) => sum + val, 0);
@@ -362,6 +550,18 @@ async function syncAllContent() {
         console.log('%c✅ SINCRONIZACIÓN COMPLETA', 'font-size: 14px; font-weight: bold; color: #46d369;');
         console.log(`📊 Total guardado: ${total} items`);
         console.log(`⏱️ Tiempo: ${duration}s`);
+        console.log('%c🌍 Categorías sincronizadas:', 'color: #01b4e4; font-weight: bold;');
+        console.log('  • Películas Trending & Populares');
+        console.log('  • Series Trending & Populares');
+        console.log('  • Top Rated Movies');
+        console.log('  • Anime Japonés');
+        console.log('  • K-Dramas Coreanos');
+        console.log('  • Dramas Chinos');
+        console.log('  • Dramas Tailandeses');
+        console.log('  • Series Turcas');
+        console.log('  • Bollywood (India)');
+        console.log('  • Cine Latinoamericano');
+        console.log('  • Cine Europeo');
 
         return { success: true, total, duration };
 
