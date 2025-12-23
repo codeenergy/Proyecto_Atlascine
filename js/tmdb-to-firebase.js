@@ -6,7 +6,7 @@
 
 const TMDB_SYNC_CONFIG = {
     // Usando API Key v3 directamente (más estable)
-    apiKey: '84d321f24b6f2b32855c209b924346f7',
+    apiKey: 'febf4ee4ded854aadc4c03d51456f537',
     useV3Auth: true, // Usar autenticación v3 en lugar de Bearer token
     baseUrl: 'https://api.themoviedb.org/3',
     imageBase: 'https://image.tmdb.org/t/p',
