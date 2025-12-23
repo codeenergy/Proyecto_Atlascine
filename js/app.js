@@ -152,11 +152,19 @@ let currentHeroSlide = 0;
 let heroCarouselInterval = null;
 
 function initHeroCarousel() {
-    // Seleccionar 5 películas/series destacadas al azar
-    const featuredContent = database
+    // Intentar primero con rating alto
+    let featuredContent = database
         .filter(item => item.rating >= 80 && item.thumbnail)
         .sort(() => Math.random() - 0.5)
         .slice(0, 5);
+
+    // Si no hay suficiente contenido con rating alto, usar cualquier contenido
+    if (featuredContent.length < 3) {
+        featuredContent = database
+            .filter(item => item.thumbnail)
+            .sort((a, b) => (b.rating || 0) - (a.rating || 0))
+            .slice(0, 5);
+    }
 
     heroSlides = featuredContent;
 
@@ -164,6 +172,12 @@ function initHeroCarousel() {
         updateHeroSlide(0);
         createHeroIndicators();
         startHeroAutoplay();
+    } else {
+        // Si aún no hay contenido, mostrar mensaje
+        const heroTitle = document.getElementById('heroTitle');
+        const heroDescription = document.getElementById('heroDescription');
+        if (heroTitle) heroTitle.textContent = 'Cargando contenido...';
+        if (heroDescription) heroDescription.textContent = 'Sincronizando desde TMDB. Espera unos momentos o ve a sync-now.html';
     }
 }
 
