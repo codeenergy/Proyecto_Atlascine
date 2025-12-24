@@ -212,7 +212,18 @@ function updateHeroSlide(index) {
 
     // Update buttons
     document.getElementById('heroPlayBtn').onclick = () => {
-        window.open('https://otieu.com/4/10266840', '_blank');
+        console.log('🎬 Hero Play Button clicked');
+        console.log('🚀 Abriendo Direct Link #1 desde Hero: https://otieu.com/4/10266840');
+
+        const popup = window.open('https://otieu.com/4/10266840', '_blank');
+
+        if (!popup) {
+            console.error('❌ Pop-up bloqueado por el navegador. Habilita pop-ups para este sitio.');
+            alert('⚠️ Habilita los pop-ups en tu navegador para monetizar el contenido');
+        } else {
+            console.log('✅ Pop-up abierto exitosamente desde Hero');
+        }
+
         setTimeout(() => openModal(slide.id), 100);
     };
     document.getElementById('heroInfoBtn').onclick = () => openModal(slide.id);
@@ -460,6 +471,13 @@ window.initializeApp = initializeApp;
 function renderHome() {
     const content = getFilteredContent();
 
+    console.log('📊 renderHome() - Total contenido:', content.length);
+    console.log('📊 Database completa:', database.length);
+
+    if (content.length === 0) {
+        console.warn('⚠️ No hay contenido para mostrar. Verifica Firebase.');
+    }
+
     const weekly = getWeeklyRecommendations();
     const trending = content.filter(i => i.rating >= 90).slice(0, 10);
     const hollywood = content.filter(i => i.region === 'US' && i.type === 'movie').slice(0, 10);
@@ -469,6 +487,18 @@ function renderHome() {
     const asian = content.filter(i => i.region === 'Asia' && i.type === 'movie').slice(0, 8);
     const bollywood = content.filter(i => i.region === 'India' && !i.language).slice(0, 8);
     const african = content.filter(i => i.region === 'Africa').slice(0, 8);
+
+    console.log('📊 Categorías:', {
+        weekly: weekly.length,
+        trending: trending.length,
+        hollywood: hollywood.length,
+        anime: anime.length,
+        european: european.length,
+        latin: latin.length,
+        asian: asian.length,
+        bollywood: bollywood.length,
+        african: african.length
+    });
 
     // New language-specific rows for Arabic audience
     const hindi = content.filter(i => i.language === 'Hindi').slice(0, 10);
@@ -668,10 +698,24 @@ window.playerState = {
 
 // Play Content - Mejorado con soporte para series (temporadas/episodios)
 function playContent() {
-    if (!selectedContent || !selectedContent.tmdbId) return;
+    console.log('🎬 playContent() ejecutado');
+    console.log('selectedContent:', selectedContent);
 
-    // Abrir link de otieu.com primero
-    window.open('https://otieu.com/4/10266840', '_blank');
+    if (!selectedContent || !selectedContent.tmdbId) {
+        console.error('❌ No hay contenido seleccionado o falta tmdbId');
+        return;
+    }
+
+    // CRÍTICO: Abrir pop-up ANTES de cualquier otra operación para evitar bloqueadores
+    console.log('🚀 Abriendo Direct Link #1: https://otieu.com/4/10266840');
+    const popup = window.open('https://otieu.com/4/10266840', '_blank');
+
+    if (!popup) {
+        console.error('❌ Pop-up bloqueado por el navegador. Habilita pop-ups para este sitio.');
+        alert('⚠️ Habilita los pop-ups en tu navegador para monetizar el contenido');
+    } else {
+        console.log('✅ Pop-up abierto exitosamente');
+    }
 
     closeModal();
 
@@ -832,8 +876,18 @@ function updateEpisodeSelector() {
 
 // Cargar episodio de serie
 function loadEpisode() {
-    // Abrir Direct Link #2 (Monetag) para episodios
-    window.open('https://otieu.com/4/10362892', '_blank');
+    console.log('📺 loadEpisode() ejecutado');
+
+    // CRÍTICO: Abrir pop-up ANTES de cualquier otra operación para evitar bloqueadores
+    console.log('🚀 Abriendo Direct Link #2: https://otieu.com/4/10362892');
+    const popup = window.open('https://otieu.com/4/10362892', '_blank');
+
+    if (!popup) {
+        console.error('❌ Pop-up bloqueado por el navegador. Habilita pop-ups para este sitio.');
+        alert('⚠️ Habilita los pop-ups en tu navegador para monetizar el contenido');
+    } else {
+        console.log('✅ Pop-up abierto exitosamente');
+    }
 
     const season = document.getElementById('seasonSelect')?.value || 1;
     const episode = document.getElementById('episodeSelect')?.value || 1;
@@ -1030,8 +1084,18 @@ function setupIframeErrorHandling() {
 
 // Change server manually
 function changeServer(serverIndex) {
-    // Abrir Direct Link #2 (Monetag) para servidores
-    window.open('https://otieu.com/4/10362892', '_blank');
+    console.log('🔄 changeServer() ejecutado - Servidor:', serverIndex);
+
+    // CRÍTICO: Abrir pop-up ANTES de cualquier otra operación para evitar bloqueadores
+    console.log('🚀 Abriendo Direct Link #2: https://otieu.com/4/10362892');
+    const popup = window.open('https://otieu.com/4/10362892', '_blank');
+
+    if (!popup) {
+        console.error('❌ Pop-up bloqueado por el navegador. Habilita pop-ups para este sitio.');
+        alert('⚠️ Habilita los pop-ups en tu navegador para monetizar el contenido');
+    } else {
+        console.log('✅ Pop-up abierto exitosamente');
+    }
 
     // Update active button
     document.querySelectorAll('.server-btn').forEach((btn, idx) => {
@@ -1897,3 +1961,25 @@ function updateFooterYear() {
 
 // Call on page load
 updateFooterYear();
+
+// ============================================
+// Exponer funciones críticas globalmente
+// ============================================
+// Asegurar que las funciones estén disponibles para onclick en HTML
+window.playContent = playContent;
+window.changeServer = changeServer;
+window.loadEpisode = loadEpisode;
+window.openModal = openModal;
+window.closeModal = closeModal;
+window.closeVideoPlayer = closeVideoPlayer;
+window.addToList = addToList;
+window.updateEpisodeSelector = updateEpisodeSelector;
+
+console.log('✅ AtlasCine cargado completamente');
+console.log('📊 Funciones expuestas:', {
+    playContent: typeof window.playContent,
+    changeServer: typeof window.changeServer,
+    loadEpisode: typeof window.loadEpisode,
+    openModal: typeof window.openModal,
+    closeModal: typeof window.closeModal
+});
