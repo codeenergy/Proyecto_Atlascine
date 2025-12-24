@@ -1822,6 +1822,18 @@ async function generateNewsFeed() {
     newsLoading.style.display = 'block';
 
     try {
+        // ⚠️ GEMINI API DESHABILITADA TEMPORALMENTE (Error 403)
+        // Usando noticias de fallback directamente
+        console.log('📰 Usando noticias de fallback (Gemini API deshabilitada temporalmente)');
+
+        // Ir directamente al fallback sin intentar llamar a la API
+        const fallbackNews = getFallbackNews();
+        newsContent.innerHTML = fallbackNews;
+        newsContent.style.display = 'grid';
+        newsLoading.style.display = 'none';
+
+        /* ===== CÓDIGO DE GEMINI API COMENTADO - DESCOMENTAR CUANDO SE ARREGLE LA API KEY =====
+
         const prompt = `Generate 5 current entertainment industry news headlines for this week. Include a mix of: streaming platform announcements, box office updates, international cinema trends (especially K-Dramas, Bollywood, anime, Turkish series), major film/series releases, and industry awards/festivals.
 
 For each news item, provide:
@@ -1887,6 +1899,8 @@ Make the news relevant to global audiences, focusing on international content (K
         localStorage.setItem('atlascine_news_last_update', Date.now().toString());
 
         showToast(t('news.updated'));
+
+        ===== FIN DEL CÓDIGO COMENTADO ===== */
 
     } catch (error) {
         console.error('Error generating news:', error);
