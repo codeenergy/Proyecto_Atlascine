@@ -1146,11 +1146,22 @@ function setupNavigation() {
             e.preventDefault();
             const section = link.dataset.section;
 
+            // Update active states
             document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
-            link.classList.add('active');
+            // Update both desktop and mobile nav-links
+            document.querySelectorAll(`[data-section="${section}"]`).forEach(l => l.classList.add('active'));
 
+            // Switch section
             document.querySelectorAll('.section-content').forEach(s => s.classList.remove('active'));
             document.getElementById(section).classList.add('active');
+
+            // Close mobile menu if open
+            const mobileMenu = document.getElementById('mobileMenu');
+            const hamburger = document.getElementById('hamburgerMenu');
+            if (mobileMenu && mobileMenu.classList.contains('active')) {
+                mobileMenu.classList.remove('active');
+                hamburger.classList.remove('active');
+            }
 
             window.scrollTo(0, 0);
         });
@@ -1977,6 +1988,19 @@ function updateFooterYear() {
 updateFooterYear();
 
 // ============================================
+// Mobile Menu Toggle
+// ============================================
+function toggleMobileMenu() {
+    const mobileMenu = document.getElementById('mobileMenu');
+    const hamburger = document.getElementById('hamburgerMenu');
+
+    mobileMenu.classList.toggle('active');
+    hamburger.classList.toggle('active');
+
+    console.log('📱 Mobile menu toggled:', mobileMenu.classList.contains('active'));
+}
+
+// ============================================
 // Exponer funciones críticas globalmente
 // ============================================
 // Asegurar que las funciones estén disponibles para onclick en HTML
@@ -1988,6 +2012,7 @@ window.closeModal = closeModal;
 window.closeVideoPlayer = closeVideoPlayer;
 window.addToList = addToList;
 window.updateEpisodeSelector = updateEpisodeSelector;
+window.toggleMobileMenu = toggleMobileMenu;
 
 console.log('✅ AtlasCine cargado completamente');
 console.log('📊 Funciones expuestas:', {
@@ -1995,5 +2020,6 @@ console.log('📊 Funciones expuestas:', {
     changeServer: typeof window.changeServer,
     loadEpisode: typeof window.loadEpisode,
     openModal: typeof window.openModal,
-    closeModal: typeof window.closeModal
+    closeModal: typeof window.closeModal,
+    toggleMobileMenu: typeof window.toggleMobileMenu
 });

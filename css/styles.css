@@ -68,6 +68,124 @@ body {
 }
 
 /* ============================================
+   HAMBURGER MENU (MOBILE)
+   ============================================ */
+.hamburger-menu {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    gap: 5px;
+    padding: 8px;
+    z-index: 1000;
+}
+
+.hamburger-menu span {
+    width: 25px;
+    height: 3px;
+    background-color: #fff;
+    transition: all 0.3s;
+    border-radius: 2px;
+}
+
+.hamburger-menu.active span:nth-child(1) {
+    transform: rotate(45deg) translate(8px, 8px);
+}
+
+.hamburger-menu.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.hamburger-menu.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(7px, -7px);
+}
+
+.mobile-menu {
+    display: none;
+    position: fixed;
+    top: 70px;
+    left: 0;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.98);
+    backdrop-filter: blur(10px);
+    z-index: 999;
+    padding: 20px 0;
+    animation: slideDown 0.3s ease;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.mobile-menu.active {
+    display: block;
+}
+
+.mobile-menu .nav-link {
+    display: block;
+    padding: 15px 4%;
+    font-size: 16px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.mobile-menu .nav-link:last-child {
+    border-bottom: none;
+}
+
+/* Desktop Navigation */
+.desktop-nav {
+    display: flex;
+    gap: 4px;
+}
+
+/* Mobile Nav Optimizations */
+@media (max-width: 768px) {
+    .hamburger-menu {
+        display: flex;
+    }
+
+    .desktop-nav {
+        display: none !important;
+    }
+
+    .nav {
+        padding: 15px 0;
+    }
+
+    .search-input {
+        width: 150px !important;
+        font-size: 14px !important;
+        padding: 8px 12px !important;
+    }
+
+    #languageSelector {
+        padding: 6px 24px 6px 8px !important;
+        font-size: 12px !important;
+    }
+
+    #siteLogo {
+        font-size: 22px !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .search-input {
+        width: 120px !important;
+        font-size: 12px !important;
+    }
+
+    #siteLogo {
+        font-size: 20px !important;
+    }
+}
+
+/* ============================================
    HERO SECTION
    ============================================ */
 .hero {

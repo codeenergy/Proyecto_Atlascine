@@ -325,7 +325,8 @@
                     id="siteLogo" onclick="navigateToHome()">
                     ATLASCINE
                 </div>
-                <div style="display: flex; gap: 4px;" id="navLinks">
+                <!-- Desktop Navigation -->
+                <div class="desktop-nav" id="navLinks">
                     <span class="nav-link active" data-section="home">Inicio</span>
                     <span class="nav-link" data-section="movies">Películas</span>
                     <span class="nav-link" data-section="series">Series</span>
@@ -334,6 +335,12 @@
                 </div>
             </div>
             <div style="display: flex; align-items: center; gap: 16px;">
+                <!-- Hamburger Menu (Mobile) -->
+                <div class="hamburger-menu" id="hamburgerMenu" onclick="toggleMobileMenu()">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
                 <!-- Language Selector -->
                 <div style="position: relative;">
                     <select id="languageSelector" onchange="changeLanguage(this.value)"
@@ -348,6 +355,15 @@
             </div>
         </div>
     </nav>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <span class="nav-link active" data-section="home">Inicio</span>
+        <span class="nav-link" data-section="movies">Películas</span>
+        <span class="nav-link" data-section="series">Series</span>
+        <span class="nav-link" data-section="anime">Anime</span>
+        <span class="nav-link" data-section="blog">Blog</span>
+    </div>
 
     <!-- Main Content -->
     <main style="padding-top: 70px;">
