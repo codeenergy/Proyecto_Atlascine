@@ -204,13 +204,123 @@ async function autoSyncFromTMDB() {
 }
 
 // ====================================
+// MIGRACIÓN AUTOMÁTICA DE DATOS
+// ====================================
+
+async function autoMigrateOldData() {
+    console.log('%c🔄 Verificando migración de datos...', 'color: #01b4e4;');
+
+    // Verificar si la migración ya se completó
+    const migrationDone = localStorage.getItem('atlascine_migration_done');
+    if (migrationDone === 'true') {
+        console.log('%c✅ Migración ya completada anteriormente', 'color: #46d369;');
+        return 0;
+    }
+
+    try {
+        const db = firebase.firestore();
+        const batchSize = 100;
+        let totalMigrated = 0;
+        let hasMore = true;
+        let lastDoc = null;
+
+        while (hasMore) {
+            let query = db.collection(COLLECTION_NAME).limit(batchSize);
+
+            if (lastDoc) {
+                query = query.startAfter(lastDoc);
+            }
+
+            const snapshot = await query.get();
+
+            if (snapshot.empty) {
+                hasMore = false;
+                break;
+            }
+
+            const batch = db.batch();
+            let batchCount = 0;
+
+            snapshot.forEach(doc => {
+                const data = doc.data();
+                // Si no tiene thumbnail pero tiene poster, necesita migración
+                if (!data.thumbnail && data.poster) {
+                    batch.update(doc.ref, { thumbnail: data.poster });
+                    batchCount++;
+                }
+            });
+
+            if (batchCount > 0) {
+                await batch.commit();
+                totalMigrated += batchCount;
+                console.log(`%c⚡ Migrados ${batchCount} documentos (total: ${totalMigrated})...`, 'color: #ff9800;');
+            }
+
+            lastDoc = snapshot.docs[snapshot.docs.length - 1];
+
+            if (snapshot.size < batchSize) {
+                hasMore = false;
+            }
+        }
+
+        if (totalMigrated > 0) {
+            console.log(`%c✅ Migración completada: ${totalMigrated} documentos actualizados`, 'color: #46d369; font-weight: bold;');
+            clearCache();
+        } else {
+            console.log('%c✅ No se necesita migración', 'color: #46d369;');
+        }
+
+        // Marcar migración como completada
+        localStorage.setItem('atlascine_migration_done', 'true');
+
+        return totalMigrated;
+    } catch (error) {
+        console.error('❌ Error en migración:', error);
+        return 0;
+    }
+}
+
+// ====================================
+// VERIFICACIÓN DE AUTO-SYNC MENSUAL
+// ====================================
+
+async function checkIfNeedsMonthlySync() {
+    const lastSyncDate = localStorage.getItem('atlascine_last_sync');
+    const now = new Date();
+
+    if (!lastSyncDate) {
+        console.log('%c⚠️ Nunca se ha sincronizado automáticamente', 'color: #ff9800;');
+        return true;
+    }
+
+    const lastSync = new Date(lastSyncDate);
+    const daysSinceSync = (now - lastSync) / (1000 * 60 * 60 * 24);
+
+    console.log(`📅 Última sincronización: hace ${Math.round(daysSinceSync)} días`);
+
+    if (daysSinceSync >= 30) {
+        console.log('%c⚠️ Han pasado más de 30 días. Auto-sync necesario.', 'color: #ff9800;');
+        return true;
+    }
+
+    console.log('%c✅ Contenido actualizado recientemente (< 30 días)', 'color: #46d369;');
+    return false;
+}
+
+// ====================================
 // INICIALIZACIÓN CON AUTO-SYNC
 // ====================================
 
 async function initFirebaseDatabase() {
     console.log('%c🔥 Firebase Database Manager', 'font-size: 14px; font-weight: bold; color: #FFA000;');
 
-    // Intentar cargar contenido existente desde fuentes específicas
+    // PASO 1: Migrar datos viejos automáticamente
+    await autoMigrateOldData();
+
+    // PASO 2: Verificar si necesita auto-sync mensual
+    const needsMonthlySync = await checkIfNeedsMonthlySync();
+
+    // PASO 3: Intentar cargar contenido existente desde fuentes específicas
     let content = await loadAllContent(FIREBASE_SOURCES);
 
     // Si no hay contenido de fuentes específicas, intentar cargar TODO
@@ -236,9 +346,13 @@ async function initFirebaseDatabase() {
         }
     }
 
-    // Si Firebase está vacío, auto-sincronizar desde TMDB
-    if (content.length === 0) {
-        console.log('%c⚠️ Firebase está vacío. Iniciando auto-sync desde TMDB...', 'color: #ff9800;');
+    // PASO 4: Auto-sincronizar si Firebase está vacío O han pasado 30 días
+    if (content.length === 0 || needsMonthlySync) {
+        if (content.length === 0) {
+            console.log('%c⚠️ Firebase está vacío. Iniciando auto-sync desde TMDB...', 'color: #ff9800;');
+        } else {
+            console.log('%c🔄 Auto-sync mensual activado. Actualizando contenido desde TMDB...', 'color: #01b4e4;');
+        }
         console.log('%c📦 Esto puede tardar 1-2 minutos. Por favor espera...', 'color: #999;');
 
         const synced = await autoSyncFromTMDB();
@@ -260,6 +374,10 @@ async function initFirebaseDatabase() {
                 });
 
                 console.log(`✅ Database auto-sincronizado: ${content.length} items disponibles`);
+
+                // Actualizar timestamp del último sync
+                localStorage.setItem('atlascine_last_sync', new Date().toISOString());
+                console.log('%c✅ Timestamp de auto-sync actualizado', 'color: #46d369;');
             } catch (error) {
                 console.error('❌ Error recargando contenido:', error);
             }
