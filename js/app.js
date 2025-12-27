@@ -22,17 +22,17 @@ const translations = {
             season: 'Temporada',
             episode: 'Episodio',
             play: 'Reproducir',
-            selectServer: 'Selecciona servidor:',
-            troubleshoot: 'Si el video no carga:',
-            tip1: 'Prueba cambiar de servidor (botones arriba)',
+            selectServer: 'Selecciona un servidor:',
+            troubleshoot: 'Si el vídeo no carga:',
+            tip1: 'Prueba a cambiar de servidor (botones de arriba)',
             tip2: 'Abre la consola del navegador (F12) y revisa los mensajes',
             tip3: 'Verifica que tu navegador permita iframes de sitios externos',
             tip4: 'Algunos servidores pueden tardar 10-30 segundos en cargar',
             prevEpisode: '← Episodio Anterior',
-            nextEpisode: 'Siguiente Episodio →'
+            nextEpisode: 'Episodio Siguiente →'
         },
-        blog: { title: 'Tendencias de Entretenimiento', subtitle: 'Descubre lo que está sucediendo en el mundo del cine, series y entretenimiento', back: 'Volver', generating: 'Generando artículo con IA...', featured: 'Artículos Destacados' },
-        news: { title: 'Noticias de la Semana', refresh: 'Actualizar', loading: 'Generando noticias con IA...', updated: 'Noticias actualizadas', error: 'Error al cargar noticias. Por favor, intenta de nuevo más tarde.' }
+        blog: { title: 'Tendencias de Entretenimiento', subtitle: 'Descubre lo que está sucediendo en el mundo del cine, las series y el entretenimiento', back: 'Volver', generating: 'Generando artículo con IA...', featured: 'Artículos Destacados' },
+        news: { title: 'Noticias de la Semana', refresh: 'Actualizar', loading: 'Generando noticias con IA...', updated: 'Noticias actualizadas', error: 'Error al cargar las noticias. Por favor, inténtalo de nuevo más tarde.' }
     },
     ar: {
         siteName: 'أطلس سينما',
@@ -61,28 +61,28 @@ const translations = {
     },
     fr: {
         siteName: 'AtlasCine',
-        nav: { home: 'Accueil', movies: 'Films', series: 'Séries', anime: 'Anime', blog: 'Blog', favorites: 'Favoris', search: 'Rechercher films, séries, anime...' },
-        home: { weeklyTitle: 'RECOMMANDATIONS DE LA SEMAINE', trending: '🔥 Les plus regardés', hollywood: '🇺🇸 Productions Hollywood', anime: '🎌 Anime en Vedette', european: '🇪🇺 Cinéma Européen', latin: '🌎 Cinéma Latino-Américain', asian: '🏮 Cinéma Asiatique', bollywood: '🇮🇳 Bollywood', african: '🌍 Cinéma Africain', hindi: '🇮🇳 Dramas Hindi', korean: '🇰🇷 K-Dramas', turkish: '🇹🇷 Séries Turques', thai: '🇹🇭 Dramas Thaïlandais' },
-        sections: { movies: 'Films', series: 'Séries', anime: 'Anime' },
+        nav: { home: 'Accueil', movies: 'Films', series: 'Séries', anime: 'Animé', blog: 'Blog', favorites: 'Favoris', search: 'Rechercher des films, séries, animés...' },
+        home: { weeklyTitle: 'RECOMMANDATIONS DE LA SEMAINE', trending: '🔥 Tendances actuelles', hollywood: '🇺🇸 Grandes Productions Hollywood', anime: '🎌 Animé en Vedette', european: '🇪🇺 Cinéma Européen', latin: '🌎 Cinéma Latino-Américain', asian: '🏮 Cinéma Asiatique', bollywood: '🇮🇳 Bollywood', african: '🌍 Cinéma Africain', hindi: '🇮🇳 Séries Hindi', korean: '🇰🇷 K-Dramas', turkish: '🇹🇷 Séries Turques', thai: '🇹🇭 Séries Thaïlandaises' },
+        sections: { movies: 'Films', series: 'Séries', anime: 'Animé' },
         filters: { language: 'Langue / Région:', genre: 'Genre:', all: 'Tous' },
         player: {
             changeServer: 'Changer de Serveur:',
             server: 'Serveur',
-            loading: 'Chargement',
+            loading: 'Chargement du Serveur',
             season: 'Saison',
             episode: 'Épisode',
             play: 'Lire',
-            selectServer: 'Sélectionnez le serveur:',
+            selectServer: 'Sélectionnez un serveur:',
             troubleshoot: 'Si la vidéo ne se charge pas:',
             tip1: 'Essayez de changer de serveur (boutons ci-dessus)',
             tip2: 'Ouvrez la console du navigateur (F12) et vérifiez les messages',
-            tip3: 'Vérifiez que votre navigateur autorise les iframes de sites externes',
-            tip4: 'Certains serveurs peuvent prendre 10 à 30 secondes à charger',
+            tip3: 'Vérifiez que votre navigateur autorise les iframes des sites externes',
+            tip4: 'Certains serveurs peuvent prendre 10 à 30 secondes pour charger',
             prevEpisode: '← Épisode Précédent',
             nextEpisode: 'Épisode Suivant →'
         },
-        blog: { title: 'Tendances Divertissement', subtitle: 'Découvrez ce qui se passe dans le monde du cinéma et des séries', back: 'Retour', generating: 'Génération de l\'article...', featured: 'Articles en Vedette' },
-        news: { title: 'Actualités de la Semaine', refresh: 'Actualiser', loading: 'Génération des actualités...', updated: 'Actualités mises à jour', error: 'Erreur lors du chargement des actualités. Veuillez réessayer.' }
+        blog: { title: 'Tendances du Divertissement', subtitle: 'Découvrez ce qui se passe dans le monde du cinéma, des séries et du divertissement', back: 'Retour', generating: 'Génération de l\'article avec IA...', featured: 'Articles en Vedette' },
+        news: { title: 'Actualités de la Semaine', refresh: 'Actualiser', loading: 'Génération des actualités avec IA...', updated: 'Actualités mises à jour', error: 'Erreur lors du chargement des actualités. Veuillez réessayer plus tard.' }
     },
     en: {
         siteName: 'AtlasCine',
@@ -475,7 +475,6 @@ function initializeApp() {
     renderMovies();
     renderSeries();
     renderAnime();
-    renderProducerRows(); // Render streaming platform content
     setupNavigation();
     setupSearch();
     setupGenreFilters();
@@ -624,35 +623,6 @@ function renderAnime(genre = 'all') {
     document.getElementById('animeGrid').innerHTML = anime.map(createCard).join('');
 }
 
-// Render Producer Rows (Netflix, Amazon, Disney+, etc.)
-function renderProducerRows() {
-    const producers = {
-        'Netflix': 'netflixRow',
-        'Amazon': 'amazonRow',
-        'Disney': 'disneyRow',
-        'HBO': 'hboRow',
-        'Hulu': 'huluRow',
-        'Fox': 'foxRow'
-    };
-
-    Object.entries(producers).forEach(([producer, rowId]) => {
-        const producerContent = database.filter(i => i.producer === producer);
-        const rowElement = document.getElementById(rowId);
-
-        if (rowElement) {
-            if (producerContent.length > 0) {
-                rowElement.innerHTML = producerContent.slice(0, 10).map(createCard).join('');
-            } else {
-                // Show placeholder if no content available
-                rowElement.innerHTML = `
-                    <div style="padding: 40px; text-align: center; color: rgba(255,255,255,0.5);">
-                        <p>Contenido próximamente...</p>
-                    </div>
-                `;
-            }
-        }
-    });
-}
 
 // Create Card with Favorite Icon
 function createCard(item) {
