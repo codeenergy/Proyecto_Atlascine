@@ -178,12 +178,54 @@ function mapRegion(country) {
 /**
  * GUARDAR EN FIREBASE
  */
-async function saveToFirebase(item) {
+/**
+ * Verificar si un item ya existe en Firebase
+ */
+async function itemExistsInFirebase(docId) {
+    try {
+        const db = firebase.firestore();
+        const doc = await db.collection(TMDB_SYNC_CONFIG.collection).doc(docId).get();
+        return doc.exists;
+    } catch (error) {
+        console.error('Error verificando existencia:', error);
+        return false;
+    }
+}
+
+/**
+ * Guardar item en Firebase (SIN DUPLICADOS)
+ * Solo guarda si NO existe o si ha pasado más de 30 días
+ */
+async function saveToFirebase(item, forceUpdate = false) {
     try {
         const db = firebase.firestore();
         const docId = `${item.source}-${item.type}-${item.tmdbId}`;
 
+        // Si no forzamos actualización, verificar si existe
+        if (!forceUpdate) {
+            const docRef = db.collection(TMDB_SYNC_CONFIG.collection).doc(docId);
+            const doc = await docRef.get();
+
+            if (doc.exists) {
+                const data = doc.data();
+                const lastUpdate = data.lastSync ? new Date(data.lastSync) : null;
+                const now = new Date();
+                const daysSinceUpdate = lastUpdate ? (now - lastUpdate) / (1000 * 60 * 60 * 24) : 999;
+
+                // Solo actualizar si han pasado más de 30 días
+                if (daysSinceUpdate < 30) {
+                    console.log(`⏭️  Saltando ${item.title} (actualizado hace ${Math.round(daysSinceUpdate)} días)`);
+                    return false; // Ya existe y está actualizado
+                }
+            }
+        }
+
+        // Agregar timestamp de última sincronización
+        item.lastSync = new Date().toISOString();
+        item.addedDate = item.addedDate || new Date().toISOString();
+
         await db.collection(TMDB_SYNC_CONFIG.collection).doc(docId).set(item, { merge: true });
+        console.log(`✅ Guardado: ${item.title}`);
         return true;
     } catch (error) {
         console.error('Error guardando en Firebase:', error);

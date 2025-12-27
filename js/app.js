@@ -334,6 +334,13 @@ function changeLanguage(lang) {
     document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
     document.documentElement.lang = lang;
 
+    // Sincronizar ambos selectores (desktop y móvil)
+    const desktopSelector = document.getElementById('languageSelector');
+    const mobileSelector = document.getElementById('mobileLanguageSelector');
+
+    if (desktopSelector) desktopSelector.value = lang;
+    if (mobileSelector) mobileSelector.value = lang;
+
     // Update UI translations
     updateUITranslations();
 
@@ -415,6 +422,35 @@ function getFilteredContent() {
 }
 
 // Initialize App Function - Called after Firebase loads data
+// ============================================
+// AUTO-SYNC MENSUAL AUTOMÁTICO
+// ============================================
+async function checkAndAutoSync() {
+    console.log('🔍 Verificando necesidad de auto-sync mensual...');
+
+    try {
+        const lastSyncDate = localStorage.getItem('atlascine_last_sync');
+        const now = new Date();
+
+        if (lastSyncDate) {
+            const lastSync = new Date(lastSyncDate);
+            const daysSinceSync = (now - lastSync) / (1000 * 60 * 60 * 24);
+
+            console.log(`📅 Última sincronización: hace ${Math.round(daysSinceSync)} días`);
+
+            if (daysSinceSync < 30) {
+                console.log('✅ Contenido actualizado recientemente. No sincronizar.');
+                return;
+            }
+        }
+
+        console.log('🔄 Han pasado más de 30 días (o nunca se sincronizó). Auto-sync necesario.');
+        console.log('💡 Ve a /sync-now.html para actualizar el contenido');
+    } catch (error) {
+        console.error('❌ Error verificando auto-sync:', error);
+    }
+}
+
 function initializeApp() {
     console.log('🚀 Inicializando AtlasCine App...');
 
@@ -423,7 +459,7 @@ function initializeApp() {
         window.database = [];
     }
 
-    console.log(`✅ Database: ${window.database.length} items`);
+    console.log(`✅ Database inicial: ${window.database.length} items`);
 
     // Set initial language
     const savedLang = localStorage.getItem('atlascine_language') || 'es';
@@ -445,6 +481,9 @@ function initializeApp() {
     setupScrollNav();
     generateTrendingTopics();
     loadNewsFeed(); // Load weekly entertainment news
+
+    // Verificar auto-sync mensual
+    checkAndAutoSync();
 
     console.log('🎉 AtlasCine listo!');
 }
@@ -658,8 +697,20 @@ function toggleFavorite(id) {
 
 // Open Modal
 function openModal(id) {
+    console.log('🎬 openModal() ejecutado con ID:', id);
+    console.log('📊 Database total:', database.length, 'items');
+
     selectedContent = database.find(i => i.id === id);
-    if (!selectedContent) return;
+
+    if (!selectedContent) {
+        console.error('❌ No se encontró contenido con ID:', id);
+        console.log('🔍 IDs disponibles:', database.slice(0, 5).map(i => ({ id: i.id, title: i.title })));
+        alert('⚠️ Error: No se pudo cargar el contenido. Recarga la página.');
+        return;
+    }
+
+    console.log('✅ Contenido seleccionado:', selectedContent.title);
+    console.log('📦 tmdbId:', selectedContent.tmdbId);
 
     document.getElementById('modalHero').style.backgroundImage = `url(${selectedContent.thumbnail})`;
     document.getElementById('modalTitle').textContent = selectedContent.title;
@@ -1170,8 +1221,19 @@ function setupNavigation() {
 
 // Setup Search
 function setupSearch() {
-    document.getElementById('searchInput').addEventListener('input', (e) => {
+    function handleSearch(e) {
         const query = e.target.value.toLowerCase();
+
+        // Sincronizar ambos inputs
+        const desktopSearch = document.getElementById('searchInput');
+        const mobileSearch = document.getElementById('mobileSearchInput');
+
+        if (e.target.id === 'searchInput' && mobileSearch) {
+            mobileSearch.value = e.target.value;
+        } else if (e.target.id === 'mobileSearchInput' && desktopSearch) {
+            desktopSearch.value = e.target.value;
+        }
+
         if (query.length < 2) return;
 
         const results = database.filter(i =>
@@ -1185,7 +1247,27 @@ function setupSearch() {
         document.querySelector('[data-section="movies"]').classList.add('active');
         document.querySelectorAll('.section-content').forEach(s => s.classList.remove('active'));
         document.getElementById('movies').classList.add('active');
-    });
+
+        // Cerrar menú móvil si está abierto
+        const mobileMenu = document.getElementById('mobileMenu');
+        const hamburger = document.getElementById('hamburgerMenu');
+        if (mobileMenu && mobileMenu.classList.contains('active')) {
+            mobileMenu.classList.remove('active');
+            hamburger.classList.remove('active');
+        }
+    }
+
+    // Configurar ambos inputs
+    const desktopSearch = document.getElementById('searchInput');
+    const mobileSearch = document.getElementById('mobileSearchInput');
+
+    if (desktopSearch) {
+        desktopSearch.addEventListener('input', handleSearch);
+    }
+
+    if (mobileSearch) {
+        mobileSearch.addEventListener('input', handleSearch);
+    }
 }
 
 // Setup Genre Filters

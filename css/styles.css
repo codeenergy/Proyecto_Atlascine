@@ -158,28 +158,33 @@ body {
         padding: 15px 0;
     }
 
-    .search-input {
-        width: 150px !important;
-        font-size: 14px !important;
-        padding: 8px 12px !important;
-    }
-
+    /* Ocultar búsqueda e idioma del header en móvil (están en el menú hamburguesa) */
+    #searchInput,
     #languageSelector {
-        padding: 6px 24px 6px 8px !important;
-        font-size: 12px !important;
+        display: none !important;
     }
 
     #siteLogo {
         font-size: 22px !important;
     }
+
+    /* Estilos para búsqueda móvil dentro del menú */
+    .mobile-search {
+        width: 100%;
+        padding: 10px;
+        font-size: 14px;
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 6px;
+        color: #fff;
+    }
+
+    .mobile-search::placeholder {
+        color: rgba(255, 255, 255, 0.5);
+    }
 }
 
 @media (max-width: 480px) {
-    .search-input {
-        width: 120px !important;
-        font-size: 12px !important;
-    }
-
     #siteLogo {
         font-size: 20px !important;
     }

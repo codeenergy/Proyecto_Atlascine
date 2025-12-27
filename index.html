@@ -363,6 +363,20 @@
         <span class="nav-link" data-section="series">Series</span>
         <span class="nav-link" data-section="anime">Anime</span>
         <span class="nav-link" data-section="blog">Blog</span>
+
+        <!-- Búsqueda y Idioma en Menú Móvil -->
+        <div style="padding: 15px 4%; border-top: 1px solid rgba(255,255,255,0.1); margin-top: 10px;">
+            <input type="text" class="search-input mobile-search" id="mobileSearchInput" placeholder="Buscar..."
+                style="width: 100%; margin-bottom: 12px;">
+
+            <select id="mobileLanguageSelector" onchange="changeLanguage(this.value)"
+                style="width: 100%; background: #1a1a1a; border: 1px solid rgba(255,255,255,0.3); color: #fff; padding: 10px; border-radius: 6px; cursor: pointer; font-size: 14px;">
+                <option value="es">🇪🇸 Español</option>
+                <option value="ar">🇸🇦 العربية</option>
+                <option value="fr">🇫🇷 Français</option>
+                <option value="en">🇬🇧 English</option>
+            </select>
+        </div>
     </div>
 
     <!-- Main Content -->
