@@ -96,9 +96,10 @@ function convertToFirebaseFormat(item, type, source = 'tmdb') {
         // Géneros (usar "genre" para consistencia con app.js)
         genre: genreNames,
 
-        // Imágenes
+        // Imágenes (thumbnail es el poster para compatibilidad con app.js)
         poster: item.poster_path ? `${TMDB_SYNC_CONFIG.imageBase}/w500${item.poster_path}` : '',
         backdrop: item.backdrop_path ? `${TMDB_SYNC_CONFIG.imageBase}/original${item.backdrop_path}` : '',
+        thumbnail: item.poster_path ? `${TMDB_SYNC_CONFIG.imageBase}/w500${item.poster_path}` : '',
 
         // Descripción
         description: item.overview || 'Sin descripción disponible.',

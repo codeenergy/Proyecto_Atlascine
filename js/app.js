@@ -187,10 +187,11 @@ function updateHeroSlide(index) {
     currentHeroSlide = index;
     const slide = heroSlides[index];
 
-    // Update background
+    // Update background (usar thumbnail o poster o backdrop)
     const heroBg = document.getElementById('heroBg');
     if (heroBg) {
-        heroBg.style.backgroundImage = `url(${slide.thumbnail})`;
+        const bgImage = slide.backdrop || slide.thumbnail || slide.poster || '';
+        heroBg.style.backgroundImage = bgImage ? `url(${bgImage})` : '';
     }
 
     // Update content
@@ -658,10 +659,13 @@ function createCard(item) {
     const favClass = isFavorite(item.id) ? 'active' : '';
     const heartIcon = isFavorite(item.id) ? '❤️' : '🤍';
 
+    // Usar thumbnail o poster como fallback + placeholder si falla
+    const imageUrl = item.thumbnail || item.poster || 'https://via.placeholder.com/300x450/1a1a1a/ffffff?text=No+Image';
+
     return `
-        <div class="card" onclick="openModal(${item.id})">
-            <img src="${item.thumbnail}" alt="${item.title}">
-            <div class="fav-icon ${favClass}" onclick="event.stopPropagation(); toggleFavorite(${item.id})">
+        <div class="card" onclick="openModal('${item.id}')">
+            <img src="${imageUrl}" alt="${item.title}" onerror="this.src='https://via.placeholder.com/300x450/1a1a1a/ffffff?text=No+Image'">
+            <div class="fav-icon ${favClass}" onclick="event.stopPropagation(); toggleFavorite('${item.id}')">
                 ${heartIcon}
             </div>
             <div class="card-overlay">
@@ -712,7 +716,8 @@ function openModal(id) {
     console.log('✅ Contenido seleccionado:', selectedContent.title);
     console.log('📦 tmdbId:', selectedContent.tmdbId);
 
-    document.getElementById('modalHero').style.backgroundImage = `url(${selectedContent.thumbnail})`;
+    const modalBg = selectedContent.backdrop || selectedContent.thumbnail || selectedContent.poster || '';
+    document.getElementById('modalHero').style.backgroundImage = modalBg ? `url(${modalBg})` : '';
     document.getElementById('modalTitle').textContent = selectedContent.title;
     document.getElementById('modalRating').innerHTML = `⭐ ${selectedContent.rating}%`;
     document.getElementById('modalYear').textContent = selectedContent.year;
